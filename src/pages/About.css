@@ -1,0 +1,25 @@
+.About {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background: url('C:\Users\Ushra\shraddha\public\about.jpg');
+    background-size:auto;
+    color: white;
+    text-align: center;
+  }
+  
+  .about-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .About h2 {
+    margin-bottom: 20px;
+  }
+  
+  .About p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
