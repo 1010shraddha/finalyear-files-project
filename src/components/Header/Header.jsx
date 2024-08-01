@@ -1,9 +1,9 @@
 import React from "react";
 import {NavLink} from 'react-router-dom';
 import './header.css';
-//import logo from '../../image/logo.jpeg';
-import logo from '../../../image/logo2.jpg';
-import usericon from '../../../image/add-friend.png';
+import logo from '../../image/logo2.jpg';
+//import logo from '../../../image/logo2.jpg';
+import usericon from '../../image/add-friend.png';
 import { motion } from 'framer-motion';
 
 import{Container,Row} from "reactstrap";
@@ -62,18 +62,21 @@ const Header = () => {
 
                     <div className="nav__icon">
                         
-                    <span className="fav__icon"><i class="ri-heart-line"></i></span>
+                    <span className="fav__icon"><i class="ri-heart-line"></i>
+                    <span className="badge">1</span></span>
                         <span className="cart__icon"><i class="ri-shopping-cart-fill"></i>
-                
+                        <span className="badge">1</span>
                     </span>
+                    
 
                     <span><motion.img whileTap={{scale:1.1}}src={usericon} alt=""  height={20}/></span>
                     </div>
-                    <div className=".u__menu">
-                        <span>
-                        <i class="ri-menu-5-line"></i>
-                        </span>
+                    <div className=".mob__menu">
+                    <span>
+                         <i className="ri-menu-line"></i>
+                    </span>
                     </div>
+
                     
                 </div>
             </Row>
