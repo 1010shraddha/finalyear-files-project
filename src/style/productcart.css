@@ -1,0 +1,130 @@
+/* Container for the product cards in a horizontal row */
+.products_row {
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    gap: 30px; /* Space between items */
+    padding: 20px 0; /* Vertical padding for the container */
+    overflow-x: auto; /* Allows horizontal scrolling if the content overflows */
+}
+
+/* Individual product cards */
+.product_item {
+    cursor: pointer;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    padding: 20px; /* Space inside the card */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
+    width: 250px; /* Fixed width for all product cards */
+    min-height: 400px; /* Minimum height for consistency */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Hover effect on the card */
+.product_item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Image container */
+.product_img {
+    margin-bottom: 15px; /* Space below the image */
+    width: 100%; /* Full width of the card */
+    height: 200px; /* Fixed height for uniformity */
+    overflow: hidden; /* Hide overflow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product_img img {
+    width: 100%; /* Image takes full width */
+    height: 100%; /* Image takes full height */
+    object-fit: cover; /* Ensure image covers the area without distortion */
+}
+
+/* Product info */
+.product__info {
+    margin-bottom: 10px;
+}
+
+/* Product title */
+.product__info h3 {
+    font-size: 1.2rem; /* Font size for the product name */
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-top: 15px;
+    white-space: nowrap; /* Prevents wrapping */
+    overflow: hidden; /* Hides overflow */
+    text-overflow: ellipsis; /* Adds ellipsis for long names */
+}
+
+.product__info h3 a {
+    color: inherit;
+    text-decoration: none; /* Removes underline from link */
+}
+
+.product__info span {
+    font-size: 1rem; /* Font size for the category */
+    color: #7f8c8d;
+}
+
+/* Product card bottom section */
+.product_card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.Price {
+    color: var(--primary-color);
+    font-size: 1.3rem; /* Font size for price */
+    font-weight: 500;
+}
+
+.product_card-bottom span i {
+    font-size: 1.5rem; /* Size for icon */
+    padding: 8px; /* Clickable area */
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.product_card-bottom span i:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .product_item {
+        width: 200px; /* Adjust width for smaller screens */
+        padding: 15px;
+    }
+
+    .product_img {
+        height: 150px; /* Adjust height for smaller screens */
+    }
+
+    .product_img img {
+        height: 150px; /* Maintain height for smaller screens */
+        object-fit: cover;
+    }
+
+    .product__info h3 {
+        font-size: 1.1rem;
+    }
+
+    .Price {
+        font-size: 1.2rem;
+    }
+
+    .product_card-bottom span i {
+        font-size: 1.4rem;
+    }
+}

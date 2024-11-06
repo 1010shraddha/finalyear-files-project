@@ -1,9 +1,11 @@
 import React from "react";
 import {NavLink} from 'react-router-dom';
 import './header.css';
-import logo from '../../image/logo2.jpg';
-//import logo from '../../../image/logo2.jpg';
-import usericon from '../../image/add-friend.png';
+//import logo from '../../image/logo2.jpg';
+//import logo from '../asset/image/logo2.jpg'; 
+import logo from '../../asset/image/logo2.jpg';
+
+import usericon from '../../asset/image/add-friend.png';
 import { motion } from 'framer-motion';
 
 import{Container,Row} from "reactstrap";
@@ -37,7 +39,7 @@ const Header = () => {
                         <img src={logo} alt="logo"  />
                         <div>
                             <h1>Shrinath Furnitures</h1>
-                            <p>Since 1996</p>
+                           
                         </div>
                     </div>
 

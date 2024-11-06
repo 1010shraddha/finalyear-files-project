@@ -13,8 +13,8 @@ body {
 
 /* Styling for the hero section */
 .hero_section {
-    background: linear-gradient(135deg, #d1e2e4 0%, #a6c0fe 100%); /* Soft gradient background */
-    padding: 50px 0; /* Generous padding for spacing */
+    background: linear-gradient(135deg, #d1e2e4 0%, #a6c0fe 100%);
+   padding: 10px;
     color: white; /* Text color to contrast the background */
     position: relative; /* For positioning the image */
     overflow: hidden; /* Prevent overflow issues */
@@ -127,3 +127,142 @@ body {
     
   }
 }
+
+.trending_products {
+  padding: 50px 0;
+  background: #ffffff; /* White background for the products section */
+  text-align: center; /* Center text horizontally */
+}
+
+.selection_title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+/* Styling for the Best Sales section */
+.best__sales {
+  padding: 50px 0;
+  background: #f9f9f9; /* Light gray background for differentiation */
+  text-align: center;
+}
+
+.best__sales .selection_title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444; /* Slightly darker color */
+  margin-bottom: 30px;
+}
+
+.best__sales .product_item {
+  background-color: #fff; /* Make each product card stand out */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.best__sales .product_item:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}
+.timer__count {
+  background: var(--primary-color);
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Align image container to the right */
+  position: relative;
+}
+
+.timer__image-container {
+  display: flex;
+  justify-content: flex-end; /* Ensures image stays on the right */
+  width: 100%;
+}
+
+.timer__img {
+  width: 30%; /* Adjusted smaller size */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 100%; /* Prevent image from overflowing */
+  object-fit: contain; /* Ensure image fits well within container */
+}
+.Clock_top-content {
+  text-align: center; /* Center-align the text */
+  color: white; /* Set text color to white */
+  padding: 20px; /* Optional: Add padding for better spacing */
+}
+
+.Clock_top-content h4 {
+  font-size: 25px; /* Larger font size for the subtitle */
+  font-weight: 300; /* Slightly bold for emphasis */
+  margin-bottom: 10px; /* Add some space below */
+}
+
+.Clock_top-content h3 {
+  font-size: 28px; /* Larger font size for the main heading */
+  font-weight: 700; /* Bold font for a strong impression */
+  margin: 0; /* Remove default margin */
+}
+
+
+.store_btn {
+  background: #fff;
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 12px 25px;  /* Adjust padding for better button size */
+  border-radius: 30px;  /* Rounded corners for the button */
+  text-align: center;  /* Center text inside the button */
+  display: inline-block;  /* Ensure button behaves like an inline element */
+  margin-top: 20px;  /* Space between the button and text */
+  cursor: pointer;  /* Change cursor to pointer on hover */
+  transition: background-color 0.3s, transform 0.3s;  /* Smooth hover effect */
+}
+.store_btn a:hover{
+  color: var(--primary-color);
+}
+/* New Arrivals section */
+.new__arrivals {
+  padding: 50px 0;
+  background: #ffffff;
+  text-align: center;
+}
+
+.new__arrivals .selection_title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.new__arrivals .product_item {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.new__arrivals .product_item:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Popular Category section */
+.popular_category {
+  padding: 50px 0;
+  background: #f9f9f9; /* Light gray background */
+  text-align: center;
+}
+
+.popular_category .selection_title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.popular_category .product_item {
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.popular_category .product_item:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
