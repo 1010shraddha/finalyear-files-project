@@ -6,8 +6,8 @@ const ProductsList = ({ data }) => {
   return (
     <Container>
       <Row className="products_row"> {/* Add the custom class here */}
-        {data?.map(item => (
-          <ProductCard key={item.id} item={item} />
+        {data?.map((item , index) => (
+          <ProductCard item={item} key={index} />
         ))}
       </Row>
     </Container>

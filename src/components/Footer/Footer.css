@@ -1,0 +1,56 @@
+footer {
+    padding-top: 30px; /* Reduced padding for better layout consistency */
+    padding-bottom: 15px; /* Reduced padding for better layout consistency */
+    background: var(--primary-color);
+}
+
+.footer__text {
+    line-height: 30px;
+    color: #f0f0f0;
+}
+
+.footer__quick-links .list-group-item,
+.footer__contact .list-group-item {
+    background-color: transparent !important;
+    border: none !important;
+    padding-left: 0 !important;
+    color: #f0f0f0;
+}
+
+.footer__quick-links a,
+.footer__quick-links a:hover {
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+.quick__links-title {
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.footer__contact .list-group-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Added gap for better spacing */
+    flex-wrap: nowrap;
+}
+
+.footer__contact .list-group-item span {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.footer__contact .list-group-item p {
+    font-size: 1rem;
+    margin-bottom: 0;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+.footer_copyright {
+    color: #f0f0f0;
+    font-size: 0.9rem;
+    margin-top: 20px; /* Reduced margin to decrease spacing */
+    text-align: center;
+}
