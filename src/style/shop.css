@@ -1,0 +1,53 @@
+.filter__widget {
+  margin-top: 30px; /* Adjust as needed */
+}
+
+.filter__widget select {
+  padding: 8px 20px;
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  background-color: var(--primary-color);
+  border-radius: 5px;
+  color: #fff;
+}
+
+.filter__widget select:focus {
+  outline: none !important;
+}
+
+.filter__widget select option {
+  font-size: 0.9rem;
+}
+
+/* Adjust the search box to be smaller */
+.search__box {
+  width: auto; /* Make the width dynamic, just enough for the input and icon */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding-right: 10px;
+  padding-left: 8px;
+  cursor: pointer;
+  margin-top: 30px; /* Adjust margin as needed */
+}
+
+/* Adjust input field to be smaller */
+.search__box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 6px 10px; /* Smaller padding */
+  font-size: 1rem; /* Adjust font size */
+}
+
+/* Adjust the search icon size */
+.search__box span {
+  color: var(--primary-color);
+  font-size: 1.2rem; /* Smaller icon size */
+}
+
+.search__box i {
+  font-size: 1.2rem; /* Adjust icon size */
+}

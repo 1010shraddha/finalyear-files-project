@@ -9,7 +9,7 @@ const Clock = () => {
 
   useEffect(() => {
     const countDown = () => {
-      const destination = new Date('Nov 11, 2024').getTime();
+      const destination = new Date('Nov 27, 2024').getTime();
 
       const interval = setInterval(() => {
         const now = new Date().getTime();
@@ -45,35 +45,35 @@ const Clock = () => {
   }, []); // Empty dependency array ensures it runs only once when the component mounts
 
   return (
-    <div className="clock__wrapper ">
-      <div className="clock__data ">
-        <div className='text-center'>
-          <h1 className='text-white fs-3 mb-2'>{days}</h1>
-          <h5 className='text-white fs-6'>Days</h5>
+    <div className="clock__wrapper">
+      <div className="clock__data">
+        <div className="text-center">
+          <h1 className="text-white">{days}</h1>
+          <h5 className="text-white">Days</h5>
         </div>
-        <span className='text-white fs-3'>:</span>
-      </div>
-
-      <div className="clock__data ">
-        <div className='text-center'>
-          <h1 className='text-white fs-3 mb-2'>{hours}</h1>
-          <h5 className='text-white fs-6'>Hours</h5>
-        </div>
-        <span className='text-white fs-3'>:</span>
-      </div>
-
-      <div className="clock__data ">
-        <div className='text-center'>
-          <h1 className='text-white fs-3 mb-2'>{minutes}</h1>
-          <h5 className='text-white fs-6'>Minutes</h5>
-        </div>
-        <span className='text-white fs-3'>:</span>
+        <span className="text-white">:</span>
       </div>
 
       <div className="clock__data">
-        <div className='text-center'>
-          <h1 className='text-white fs-3 mb-2'>{seconds}</h1>
-          <h5 className='text-white fs-6'>Seconds</h5>
+        <div className="text-center">
+          <h1 className="text-white">{hours}</h1>
+          <h5 className="text-white">Hours</h5>
+        </div>
+        <span className="text-white">:</span>
+      </div>
+
+      <div className="clock__data">
+        <div className="text-center">
+          <h1 className="text-white">{minutes}</h1>
+          <h5 className="text-white">Minutes</h5>
+        </div>
+        <span className="text-white">:</span>
+      </div>
+
+      <div className="clock__data">
+        <div className="text-center">
+          <h1 className="text-white">{seconds}</h1>
+          <h5 className="text-white">Seconds</h5>
         </div>
       </div>
     </div>

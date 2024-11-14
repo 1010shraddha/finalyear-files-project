@@ -29,19 +29,20 @@ const Home = () => {
     const year = new Date().getFullYear();
 
     useEffect(() => {
-        const filteredTrendingProduct = product.filter(item => item.category === "Rocking Chair");
+        const filteredTrendingProduct = product.filter(item => item.category === "Chair");
 
         const filteredBestProduct = product.filter(item => 
-            ["Chair", "Couch"].includes(item.category) 
+            ["Chair", "Sofa"].includes(item.category) 
         );
-        const filteredNewProduct = product.filter(item => item.category === "Rocking Chair");
-        const filteredNew1Product = product.filter(item => item.category === "Rocking Chair");
+        const filteredNewProduct = product.filter(item => item.category === "Chair");
+        const filteredNew1Product = product.filter(item => item.category === "Chair");
 
 
         setTrendingProducts(filteredTrendingProduct);
         setBestSalesProducts(filteredBestProduct);
         setNewProducts(filteredNewProduct);
         setNew1Products(filteredNew1Product)
+        //popular needs to be added
 
         
     }, []);
@@ -106,11 +107,15 @@ const Home = () => {
                 <h3 >Quality Couch</h3>
             </div>
             <Clock />
-           <motion.button 
-           whileTap={{scale:1.2}}
-           className="buy__btn store_btn">
-            <Link to="/shop">Visit Store</Link>
-           </motion.button>
+            <motion.button 
+  whileTap={{ scale: 1.2 }} 
+  className="buy__btn store_btn"
+>
+  <Link to="/shop" className="store-link">
+    Visit Store
+  </Link>
+</motion.button>
+
 
          
             </Col>

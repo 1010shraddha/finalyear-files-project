@@ -1,0 +1,268 @@
+ /* .product__details{
+    margin-top:50px;
+}
+.product__details h2{
+   font-size:1.6rem;
+   margin-bottom:10px; 
+}
+.product__rating span i{
+    color: coral;
+
+}
+.product__rating p span{
+    color: coral !important; 
+    font-weight:500px;
+
+}
+.product__price{
+    font-size:1.2rem;
+    font-weight:400;
+}
+.tab__wrapper{
+    margin-top:20px;
+    color:var(--primary-color);
+    font-weight: 500;
+    font-size:1rem;
+    cursor: pointer;
+}
+.active__tab{
+font-weight: 600;
+}
+.tab__content p{
+    line-height: 30px;
+}
+.review__wrapper ul li span{
+color:coral;
+font-weight: 500;
+}
+.review__wrapper ul li p{
+    margin-top: 10px;
+} 
+.review__form{
+  width: 70%;
+  margin:auto;
+  margin-top: 50px;
+}
+.review__form h4{
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.form__group input,.form__group textarea{
+  width:100px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  padding:10px 20px;
+}
+.form__group input:focus,
+.form__group textarea:focus{
+  outline:none ;
+}
+.form__group{
+  margin-bottom: 30px;
+}
+
+.form__group span{
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  color:coral;
+  font-weight: 600;
+  cursor:pointer;
+}
+
+.related__title{
+  font-size: 1.2rem;
+  font-weight:600;
+  margin-top: 50px;
+} */
+ /* Basic styling */
+/* General Body Styling */
+.body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Product details */
+.product__details h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.product__rating span i {
+  color: #f7b92e;
+  font-size: 1.2rem;
+}
+
+.product__rating {
+  display: flex;
+  align-items: center; /* Aligns stars and rating text in the same line */
+  gap: 10px; /* Controls spacing between stars and text */
+}
+
+.product__rating span {
+  color: #f7b92e;
+  font-weight: 500;
+  font-size: 1rem; /* Adjust size as needed */
+}
+
+.product__price {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #28a745;
+  margin: 0.5rem 0;
+}
+
+
+.buy__btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: transform 0.3s ease;
+}
+
+.buy__btn:hover {
+  transform: scale(1.1);
+}
+
+
+
+.tab__wrapper h6 {
+  font-size: 1.2rem;
+  color: #333;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.active__tab {
+  border-bottom: 2px solid var(--primary-color);
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.tab__content {
+  margin-top: 20px;
+}
+
+/* Review Section */
+.product__review {
+  margin-top: 30px;
+}
+
+.review__wrapper ul {
+  list-style: none;
+  padding: 0;
+}
+
+.review__wrapper li {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+.review__wrapper h6 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.review__wrapper span {
+  font-size: 1rem;
+  color:#f7b92e;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.review__wrapper p {
+  font-size: 1rem;
+  color: #777;
+}
+
+/* Review Form */
+.review__form {
+  margin-top: 40px;
+  max-width: 500px;  
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+}
+
+.review__form .form__group {
+  margin-bottom: 15px;
+}
+
+.review__form input,
+.review__form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.review__form span {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 10px;
+  display: block;
+}
+
+.form__group span.ri-star-fill,
+.form__group span.ri-star-line {
+  font-size: 1rem;
+  cursor: pointer;
+  color: #f7b92e;
+}
+
+.form__group span.active {
+  color: #f7b92e;
+}
+
+.form__group span:hover {
+  color: #f5a623; /* Hover color */
+}
+
+/* Related Products Section */
+.related__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 50px;
+  color: #333;
+  text-align: center;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .product__rating {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product__details {
+    text-align: center;
+  }
+
+  .product__price {
+    font-size: 1.2rem;
+  }
+
+  .product__review .review__wrapper {
+    padding: 15px;
+  }
+
+  .review__form .form__group {
+    margin-bottom: 12px;
+  }
+}

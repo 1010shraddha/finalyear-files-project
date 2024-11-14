@@ -1,31 +1,30 @@
 .clock__wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .clock__data {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .clock__data  {
-    font-size: 3rem; /* Large font size for easy readability */
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
-  }
-  
-  .clock__data  {
-    font-size: 2.2rem; /* Adjusted size for labels */
-    font-weight: 500;
-    color: white;
-  }
-  
-  span {
-    font-size: 2.5rem; /* Size for colons between time units */
-    font-weight: 600;
-    color: white;
-  }
-  
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.clock__data {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clock__data  {
+  font-size: 3rem; /* Large font size for easy readability */
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.clock__data  {
+  font-size: 2.2rem; /* Adjusted size for labels */
+  font-weight: 500;
+  color: white;
+}
+
+span {
+  font-size: 2.5rem; /* Size for colons between time units */
+  font-weight: 600;
+  color: white;
+}

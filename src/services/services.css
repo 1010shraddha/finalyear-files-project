@@ -2,40 +2,44 @@
     padding: 40px 0;
     background: #ffffff;
 }
-.service_item{
-    padding: 20px;
-    
-    display:flex;
-    align-items: center;
-    column-gap: 0.7rem;
-    border-radius: 5px;
-    cursor:pointer ;
+
+.services .row {
+    display: flex;
+    justify-content: center; /* Center the items horizontally */
+    gap: 50px; /* Adjust gap between items */
+    width: 100%; /* Ensure the row takes full width */
+    flex-wrap: nowrap; /* Prevent wrapping of items */
 }
 
-.service_item span i{
-    font-size: 2.2rem;
+.service_item {
+    padding: 20px 30px;  /* Increased padding for more space inside the box */
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box; /* Ensure padding doesn't affect width calculation */
+    height: 120px; /* Increased height */
+    width: 300px; /* Increased width to make the box larger */
+}
+
+.service_item span i {
+    font-size: 2.5rem; /* Adjusted for a larger icon */
     background: var(--primary-color);
     padding: 10px;
     border-radius: 50px;
     color: #fff;
     font-weight: 400 !important;
 }
-.service_item h3{
-    color: var(--primary-color);
-    font-size: 1.1rem;
-    font-weight: 600;
 
+.service_item h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem; /* Slightly larger text */
+    font-weight: 600;
 }
-.service_item p{
-    font-size: 0.9rem;
-    margin-top: 5px;
+
+.service_item p {
+    font-size: 1rem; /* Slightly larger description */
+    margin-top: 3px;
     color: #222;
-}
-.services .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; 
-    gap: 40px; /* Adjust gap between service items */
-    margin-left: -5px; /* Remove additional margins between columns */
-    margin-right: -5px; /* Remove additional margins between columns */
 }

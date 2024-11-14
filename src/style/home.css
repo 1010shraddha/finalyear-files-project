@@ -167,8 +167,8 @@ body {
   background: var(--primary-color);
   height: 300px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Align image container to the right */
+  align-items: center;   /* Center vertically */
+  justify-content: center;  /* Center horizontally */
   position: relative;
 }
 
@@ -179,7 +179,7 @@ body {
 }
 
 .timer__img {
-  width: 30%; /* Adjusted smaller size */
+  width: 40%; /* Adjusted smaller size */
   height: auto; /* Maintain aspect ratio */
   max-width: 100%; /* Prevent image from overflowing */
   object-fit: contain; /* Ensure image fits well within container */
@@ -201,7 +201,13 @@ body {
   font-weight: 700; /* Bold font for a strong impression */
   margin: 0; /* Remove default margin */
 }
-
+.store-link {
+  color: #fff; /* Ensure the text inside the link is white */
+  text-decoration: none; /* Remove underline */
+  display: block; /* Make the link occupy the full width of the button */
+  padding: 10px 20px; /* Adjust padding to center the text inside the button */
+  text-align: center; /* Center the text inside the link */
+}
 
 .store_btn {
   background: #fff;
@@ -211,13 +217,20 @@ body {
   border-radius: 30px;  /* Rounded corners for the button */
   text-align: center;  /* Center text inside the button */
   display: inline-block;  /* Ensure button behaves like an inline element */
-  margin-top: 20px;  /* Space between the button and text */
+  margin-top: 0;  /* Space between the button and text */
   cursor: pointer;  /* Change cursor to pointer on hover */
   transition: background-color 0.3s, transform 0.3s;  /* Smooth hover effect */
 }
-.store_btn a:hover{
-  color: var(--primary-color);
+
+.store_btn:hover {
+  background-color: var(--primary-color);
+  color: #fff;
 }
+
+.store_btn a:hover {
+  color: white; /* Ensure the text turns white on hover */
+}
+
 /* New Arrivals section */
 .new__arrivals {
   padding: 50px 0;
