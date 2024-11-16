@@ -51,3 +51,14 @@
 .search__box i {
   font-size: 1.2rem; /* Adjust icon size */
 }
+
+@media only screen and (max-width:768px) {
+  .filter__widget{
+    margin-bottom: 10px;
+  }
+
+  .filter__widget{
+    padding: 7px 20px;
+    font-size: .9rem;
+  }
+}

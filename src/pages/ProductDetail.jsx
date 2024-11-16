@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
 import "../style/product_detail.css";
@@ -22,6 +22,14 @@ const ProductDetail = () => {
   const product = products.find(item => item.id === id);
   const { imgUrl, productName, price, avgRating, description, shortDesc, category } = product;
 
+  useEffect(() => {
+    // Load reviews from local storage if available
+    const storedReviews = JSON.parse(localStorage.getItem(`reviews-${id}`));
+    if (storedReviews) {
+      setReviews(storedReviews);
+    }
+  }, [id]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     const reviewUserName = reviewUser.current.value;
@@ -38,10 +46,14 @@ const ProductDetail = () => {
       text: reviewUserMsg,
     };
 
-    setReviews(prevReviews => [...prevReviews, newReview]);
+    const updatedReviews = [...reviews, newReview];
+    setReviews(updatedReviews);
+    localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews)); // Save to local storage
+
     reviewUser.current.value = '';
     reviewMsg.current.value = '';
     setRating(null);
+    toast.success('Review Submitted');
   };
 
   const addToCart = () => {
@@ -57,6 +69,10 @@ const ProductDetail = () => {
   };
 
   const relatedProducts = products.filter(item => item.category === category);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
 
   return (
     <Helmet title={productName}>
@@ -85,7 +101,6 @@ const ProductDetail = () => {
                   <p>Category: {category}</p>
                 </div>
                 <p className="mt-3">Short Description: {shortDesc}</p>
-                {/* Separate Add to Cart button */}
                 <motion.button 
                   whileTap={{ scale: 1.2 }} 
                   className="buy__btn" 
@@ -131,23 +146,30 @@ const ProductDetail = () => {
                       <h4>Comment your Experience</h4>
                       <form onSubmit={submitHandler}>
                         <div className='form__group'>
-                          <input type="text" placeholder="Enter Name" ref={reviewUser} />
+                          <input type="text" placeholder="Enter Name" ref={reviewUser}  required/>
                         </div>
-                        <div className='form__group d-flex align-items-center gap-3'>
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <span
-                              key={star}
-                              onClick={() => setRating(star)}
-                              className={rating >= star ? "ri-star-fill" : "ri-star-line"}
-                            >
-                              {star}
-                            </span>
-                          ))}
+                        <div className='form__group d-flex align-items-center gap-3 rating__group'>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(1)}>
+                            1<i className="ri-star-s-fill"></i> 
+                          </motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(2)}>
+                            2<i className="ri-star-s-fill"></i> 
+                          </motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(3)}>
+                            3<i className="ri-star-s-fill"></i> 
+                          </motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(4)}>
+                            4<i className="ri-star-s-fill"></i> 
+                          </motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(5)}>
+                            5<i className="ri-star-s-fill"></i> 
+                          </motion.span>
                         </div>
+
                         <div className='form__group'>
-                          <textarea ref={reviewMsg} rows={4} type="text" placeholder="Review Message ...." />
+                          <textarea ref={reviewMsg} rows={4} type="text" placeholder="Review Message ...." required />
                         </div>
-                        <button type="submit" className="buy__btn">Submit</button>
+                        <motion.button whileTap={{ scale: 1.2 }} type="submit" className="buy__btn">Submit</motion.button>
                       </form>
                     </div>
                   </div>
