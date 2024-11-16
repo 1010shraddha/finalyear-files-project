@@ -12,3 +12,8 @@ td,
 th{
   color: var(--primary-color);
 }
+table img {
+  width: 50px; /* Adjust width as needed */
+  height: auto;
+  object-fit: cover;
+}

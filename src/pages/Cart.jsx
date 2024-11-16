@@ -66,7 +66,7 @@ import { useSelector } from "react-redux";
 
 const Cart = () => {
 
-    const cartItems = useSelector((state) => state.cart.cartItems || []);
+    const cartItems = useSelector((state) => state.cart.items || []);
 
     return (
         <Helmet title="Cart">
@@ -95,8 +95,10 @@ const Cart = () => {
                                         <tbody>
                                           {
                                             cartItems.map((item,index)=>(
-                                                <tr>
-                                                    <td><img src={item.image} alt=""/></td>
+                                                
+                                                <tr key={index}>
+                                                  <td><img src={item.imgUrl} alt="" /></td>
+
                                                     <td>{item.productName}</td>
                                                     <td>{item.price}</td>
                                                     <td>{item.quantity}</td>
