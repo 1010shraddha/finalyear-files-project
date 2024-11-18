@@ -1,0 +1,77 @@
+.billing__form .form_group input {
+    border: 1px solid var(--card-bg-02); /* Retain existing styling */
+    width: 100%; /* Allow inputs to span the full width of their container */
+    max-width: 600px; /* Increase the max width for a larger horizontal size */
+    padding: 10px; /* Consistent padding */
+    box-sizing: border-box; /* Ensure padding/border doesn't overflow the container */
+    font-size: 16px; /* Enhance readability */
+    border-radius: 4px; /* Optional: Slight rounding for a modern look */
+}
+
+
+.checkout__cart {
+    padding: 20px;
+    background-color: var(--primary-color); /* Dark background for the cart */
+    color: #fff; /* White text for contrast */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.checkout__cart h6, h4 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Align text on opposite sides */
+}
+
+.checkout__cart h6 {
+    margin-bottom: 10px; /* Spacing between rows */
+    font-size: 16px; /* Standard font size for labels */
+    font-weight: normal; /* Neutral font weight for items like Total Qty */
+}
+
+.checkout__cart h6 span:first-child {
+    font-size: 16px; /* Ensure "Shipping:" and other labels have consistent size */
+    font-weight: normal; /* Match the font weight of other text */
+}
+
+.checkout__cart h6 span:last-child {
+    font-size: 16px; /* Values like ₹0 should have consistent size */
+    font-weight: bold; /* Slight emphasis for values */
+}
+
+.checkout__cart h6.shipping {
+    font-size: 16px; /* Keep "Shipping:" text consistent */
+    font-weight: normal; /* Normal weight for "Shipping" label */
+}
+
+.checkout__cart h6.shipping span {
+    display: block; /* Ensures "free shipping" is on a new line */
+    font-size: 14px; /* Smaller size for "free shipping" */
+    font-weight: normal;
+}
+
+.checkout__cart h4 {
+    font-size: 22px; /* Emphasize Total Cost */
+    font-weight: bold; /* Strong emphasis for total */
+    border-top: 1px solid rgba(255, 255, 255, 0.4); /* Subtle separator */
+    padding-top: 15px; /* Spacing after the separator */
+}
+
+.buy__btn {
+    background-color: white !important; /* Force white background */
+    color: var(--primary-color)!important;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+
+.buy__btn:hover {
+    background-color: #fff; /* Primary color on hover */
+    color: black; /* White text on hover */
+    border: 1px solid #fff; /* Optional: Add a border on hover */
+}

@@ -1,0 +1,76 @@
+.buy__btn.auth__btn {
+  background-color: #fff !important; /* Button color */
+  color: var(--primary-color) !important; /* Text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 40%; /* Remove 100% width to make it sized to content */
+  margin-top: 10px; /* Add some space above */
+}
+
+.buy__btn.auth__btn :hover {
+  background-color: #fff !important; /* Button color */
+  color: var(--primary-color) !important; 
+}
+
+.form__group input {
+  width: 100%; /* Ensure the input box takes full available width */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px; /* Add spacing between fields */
+}
+
+.auth__form {
+  background: var(--primary-color);
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.auth__btn{
+    background: #fff !important;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.auth__form p{
+    margin-top: 30px;
+}
+
+.auth__form p a{
+    color: rgba(255,255,255,0.735);
+}
+
+.auth__form input[type='file'] {
+  color:#fff;
+  cursor: pointer;
+}
+ 
+.custom-file-upload {
+  margin-right: 75%;
+  display: inline-block;
+  padding: 10px 20px;
+  color: var(--primary-color);
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.custom-file-upload:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+}
+
+.custom-file-upload input {
+  display: none;
+}
+
+.file-name{
+  font-size: large;
+  font-family: Arial, Helvetica, sans-serif;
+}
