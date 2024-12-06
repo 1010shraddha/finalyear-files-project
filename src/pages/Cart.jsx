@@ -30,7 +30,7 @@
 //                     <th>Price</th>
 //                     <th>Qty</th>
 //                     <motion.th whileTap={{scale: 1.2}}>Delete</motion.th>
-//                   </tr>  
+//                   </tr>
 //                 </thead>
 
 //                 <tbody>

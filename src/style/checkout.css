@@ -57,8 +57,8 @@
 }
 
 .buy__btn {
-    background-color: white !important; /* Force white background */
-    color: var(--primary-color)!important;
+    background-color: var(--primary-color)!important; /* Force white background */
+    color: white !important;
     border: none;
     border-radius: 8px;
     font-size: 16px;
