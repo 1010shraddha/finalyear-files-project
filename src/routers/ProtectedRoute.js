@@ -1,14 +1,18 @@
+// src/components/ProtectedRoute.js
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { auth } from "../firebase.config";
 
+const ProtectedRoute = ({ children }) => {
+  const user = auth.currentUser; // Check if the user is authenticated
 
-import React from 'react';
-import useAuth from '../custom-hooks/useAuth';
-import { Navigate } from 'react-router-dom';
+  // If the user is not authenticated, redirect to login
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
-const ProtectedRoute = ({children}) => {
-  
-  const {currentUser} = useAuth();
-  
-  return currentUser ? children : <Navigate to='login' />;
+  // If the user is authenticated, render the child components (Checkout page)
+  return children;
 };
 
 export default ProtectedRoute;
