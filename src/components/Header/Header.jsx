@@ -7,9 +7,9 @@ import { motion } from "framer-motion";
 import { Container, Row } from "reactstrap";
 import { useSelector } from "react-redux";
 import useAuth from "../../custom-hooks/useAuth";
-import {Link} from "react-router-dom";
-import {signOut} from "firebase/auth";
-import {auth} from "../../firebase.config";
+import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase.config";
 import { toast } from "react-toastify";
 
 const nav__links = [
@@ -24,7 +24,7 @@ const Header = () => {
     const menuRef = useRef(null);
     const navigate = useNavigate();
     const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-    const profileActionRef= useRef(null);
+    const profileActionRef = useRef(null);
     const { currentUser } = useAuth();
 
     const menuToggle = () => {
@@ -32,24 +32,22 @@ const Header = () => {
     };
 
     const navigateToCart = () => {
-        navigate("../Cart");
+        navigate("../cart");
     };
 
-const toggleProfileActions=()=>{
-    profileActionRef.current.classList.toggle("show__profileActions");
-};
+    const toggleProfileActions = () => {
+        profileActionRef.current.classList.toggle("show__profileActions");
+    };
 
-const logout=()=>{
-    signOut(auth).then(()=>{
-        toast.success('Logged out');
-        navigate('/home');
-    }).catch(err=>{
-        toast.error(err.message)
-
-    })
-
-
-}
+    const logout = async () => {
+        try {
+            await signOut(auth);
+            toast.success("Logged out successfully");
+            navigate("/home");
+        } catch (err) {
+            toast.error(err.message);
+        }
+    };
 
     useEffect(() => {
         const stickyHeaderFunc = () => {
@@ -61,13 +59,10 @@ const logout=()=>{
         };
 
         window.addEventListener("scroll", stickyHeaderFunc);
-
         return () => {
             window.removeEventListener("scroll", stickyHeaderFunc);
         };
     }, []);
-
-
 
     return (
         <header className="header" ref={headerRef}>
@@ -111,28 +106,31 @@ const logout=()=>{
                             </span>
 
                             <div className="profile">
-                            <motion.img
+                                <motion.img
                                     whileTap={{ scale: 1.1 }}
-                                    src={currentUser?.photoUrl || usericon}
+                                    src={currentUser?.photoURL || usericon}
                                     alt="User Icon"
-                                    height={20}
+                                    height={40}
+                                    width={40}
                                     onClick={toggleProfileActions}
                                 />
-                              
-
-                            <div className="profile__actions" ref={profileActionRef}
-                            onClick={toggleProfileActions}>
-                                {
-                                    currentUser ? <span onClick={logout}>Logout</span> : (
-                                    <div>
-                                        <Link to='/signup'>Signup</Link>
-                                        <Link to='/login'>Login</Link>
+                                <div
+                                    className="profile__actions"
+                                    ref={profileActionRef}
+                                >
+                                    {currentUser ? (
+                                        <div>
+                                        <Link to="/dashboard">Dashboard</Link>
+                                        <span onClick={logout}>Logout</span>
                                         </div>
-                               ) }
+                                    ) : (
+                                        <div>
+                                            <Link to="/signup">Signup</Link>
+                                            <Link to="/login">Login</Link>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
-                            </div>
-                               
-                            
                         </div>
 
                         <div className="mob__menu">

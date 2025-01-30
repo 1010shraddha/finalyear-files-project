@@ -149,6 +149,8 @@
 // };
 
 // export default Signup;
+
+
 import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
@@ -281,15 +283,15 @@ const Signup = () => {
                     />
                   </FormGroup>
 
-                  <FormGroup className="form__group d-flex align-items-center">
+                  {/* <FormGroup className="form__group d-flex align-items-center">
                     <label className="custom-file-upload me-3">
                       Choose File
                       <input type="file" onChange={handleFileChange} hidden />
                     </label>
                     <span className="file-name">
-                      {file ? file.name : "No file chosen"}
+                      {file ? file.name : "No file chosen"}     
                     </span>
-                  </FormGroup>
+                  </FormGroup> */}
 
                   <button
                     type="submit"
