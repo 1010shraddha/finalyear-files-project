@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./header.css";
 import logo from "../../asset/image/logo2.jpg";
@@ -27,6 +27,8 @@ const Header = () => {
     const profileActionRef = useRef(null);
     const { currentUser } = useAuth();
 
+    const [showActions, setShowActions] = useState(false);
+
     const menuToggle = () => {
         menuRef.current.classList.toggle("active__menu");
     };
@@ -36,7 +38,7 @@ const Header = () => {
     };
 
     const toggleProfileActions = () => {
-        profileActionRef.current.classList.toggle("show__profileActions");
+        setShowActions((prev) => !prev);
     };
 
     const logout = async () => {
@@ -47,6 +49,10 @@ const Header = () => {
         } catch (err) {
             toast.error(err.message);
         }
+    };
+
+    const handleActionClick = () => {
+        setShowActions(false); // Hide the actions when an action is clicked
     };
 
     useEffect(() => {
@@ -115,18 +121,24 @@ const Header = () => {
                                     onClick={toggleProfileActions}
                                 />
                                 <div
-                                    className="profile__actions"
+                                    className={`profile__actions ${
+                                        showActions ? "show__profileActions" : ""
+                                    }`}
                                     ref={profileActionRef}
                                 >
                                     {currentUser ? (
-                                        <div>
-                                        <Link to="/dashboard">Dashboard</Link>
-                                        <span onClick={logout}>Logout</span>
-                                        </div>
+                                       <div>
+                                       <Link to="/dashboard">Dashboard</Link>
+                                       <Link to="#" onClick={logout} className="logout-link">Logout</Link>
+                                       </div>
                                     ) : (
                                         <div>
-                                            <Link to="/signup">Signup</Link>
-                                            <Link to="/login">Login</Link>
+                                            <Link to="/signup" onClick={handleActionClick}>
+                                                Signup
+                                            </Link>
+                                            <Link to="/login" onClick={handleActionClick}>
+                                                Login
+                                            </Link>
                                         </div>
                                     )}
                                 </div>

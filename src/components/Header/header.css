@@ -4,6 +4,9 @@
   border-bottom: 1px solid #100e0e;
   backdrop-filter: blur(5px); 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 .nav_wrapper {
@@ -141,6 +144,7 @@
   z-index: 10;
   text-align: center;
   padding: 10px 0;
+  font-weight: bold;  /* Added this line to make the text bold */
 }
 
 .profile__actions.show__profileActions {
@@ -158,7 +162,7 @@
 
 .profile__actions a:hover {
   background-color: #f9e79f;
-  color: #000;
+  color: #0a1d37;
 }
 
 

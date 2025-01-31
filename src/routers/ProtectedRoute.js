@@ -17,15 +17,17 @@
 
 // export default ProtectedRoute;
 
-import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import useAuth from "../custom-hooks/useAuth"; // Corrected import
+import useAuth from "../custom-hooks/useAuth";
 
 const ProtectedRoute = () => {
-    const { currentUser } = useAuth(); // Removed redundant user variable
+  const { currentUser } = useAuth();
 
-    return currentUser ? <Outlet /> : <Navigate to="/login" />;
+  console.log("Protected Route - Current User:", currentUser); // Debugging
+
+  return currentUser ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
+
 
