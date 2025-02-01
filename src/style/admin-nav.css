@@ -1,83 +1,105 @@
 /* Ensure the header takes full width and has the primary background */
 .admin_header {
     width: 100%;
-    background: var(--primary-color) !important;  /* Using !important might not be ideal unless necessary */
-    padding: 10px 0; /* Add padding for spacing */
+    background: var(--primary-color) !important;
+    padding: 15px 0;
 }
 
-/* For the nav section, make sure it stretches 100% */
-.admin_nav-top {
-    width: 100%;
-}
-
-/* Wrapper for the navigation, aligning items properly */
+/* Navigation wrapper for proper alignment */
 .admin_nav-wrapper-top {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Keeps items spaced out */
-    padding: 0 15px; /* Adds padding to the left and right for better spacing */
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
 }
 
-/* Logo styling to ensure it looks good in flex layout */
+/* Logo styling - Shrinath furnitures name */
 .logo h2 {
-    font-size: 24px;
+    font-size: 1.7rem;
     color: white;
-    margin: 0; /* Removes any default margin for better alignment */
+    margin: 0;
 }
 
-/* Search Box Styles */
+/* Search Box Styling */
 .search_box {
     display: flex;
     align-items: center;
     background-color: white;
-    border-radius: 5px;  /* Make the corners slightly rounded */
+    border-radius: 5px;
     padding: 5px 15px;
+    width: 600px;  /* Increased width */
+    max-width: 650px; /* Ensures responsiveness */
+    position: relative;
 }
 
+/* Input field styling */
 .search_box input {
     border: none;
     outline: none;
-    padding: 10px 20px;  /* Increased vertical padding (height) */
-    font-size: 12px;
-    width: 200px;  /* Keep the width fixed, adjust as needed */
-    height: 20px;  /* Increase height for a rectangular look */
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
 }
 
+/* Search icon inside the search box */
 .search_box span {
-    margin-left: 10px;
+    position: absolute;
+    right: 10px;
+    color: #666;
     cursor: pointer;
+    font-size: 16px;
 }
 
-
-/* Styling for the right side navigation section */
+/* Profile and right section */
 .admin_nav-top-right {
     display: flex;
     align-items: center;
+    gap: 1.5rem;
 }
 
 /* Profile image styles */
 .admin_nav-top-right img {
     width: 40px;
     height: 40px;
-    border-radius: 50%;  /* Circle shape */
-    margin-left: 10px; /* Adds space between the profile image and icons */
-}
-
-/* Default text styles */
-.name {
-    color: white;
-    font-size: 16px; /* Adjust font size */
-    margin-left: 10px; /* Add spacing if needed */
-}
-
-/* Icons (ensure they're positioned well) */
-.admin_nav-top-right span {
-    margin-left: 15px;
+    border-radius: 50%;
     cursor: pointer;
 }
 
-/* Optional: Add a hover effect for better user interaction */
-.admin_nav-top-right span:hover,
-.search_box span:hover {
-    color: #f1f1f1; /* Lighter color on hover */
+/* Dashboard text alignment */
+.dashboard_text {
+    color: white;
+    font-size: 16px;
+}
+
+/* Icons on the right */
+.admin_nav-top-right span i {
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 30px; /* Increased icon size */
+}
+
+.admin_menu{
+    width:100%;
+    height:70px; 
+    line-height: 43px;
+    background: var(--card-bg-02);
+}
+
+.admin_menu-list{
+    display: flex;
+    align-items: center;
+    column-gap: 2.2rem;
+    justify-content: center;
+}
+
+.admin_menu-list .admin_menu-item a{
+    color: var(--primary-color);
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+.active__admin-menu{
+    background: whitesmoke;
 }
