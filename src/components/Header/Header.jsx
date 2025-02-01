@@ -79,7 +79,7 @@ const Header = () => {
                             <img src={logo} alt="Shrinath Furnitures Logo" />
                             <div>
                                 <h1>Shrinath Furnitures</h1>
-                                <p>Since 1996</p>
+                               
                             </div>
                         </div>
 
@@ -125,10 +125,10 @@ const Header = () => {
                                         showActions ? "show__profileActions" : ""
                                     }`}
                                     ref={profileActionRef}
-                                >
+                                 >  
+                                 {/* //src\admin\Dashboard.jsx  //src\components\Header\Header.jsx */}
                                     {currentUser ? (
-                                       <div>
-                                       <Link to="/dashboard">Dashboard</Link>
+                                       <div>         
                                        <Link to="#" onClick={logout} className="logout-link">Logout</Link>
                                        </div>
                                     ) : (
@@ -136,9 +136,11 @@ const Header = () => {
                                             <Link to="/signup" onClick={handleActionClick}>
                                                 Signup
                                             </Link>
+                                           
                                             <Link to="/login" onClick={handleActionClick}>
                                                 Login
                                             </Link>
+                                            <Link to="/dashboard">Dashboard</Link>
                                         </div>
                                     )}
                                 </div>

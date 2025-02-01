@@ -32,11 +32,12 @@ const Routers = () => {
         <Route path="cart" element={<Cart />}    />
 
         <Route path="/*" element={<ProtectedRoute/>}>
-
-        <Route path="checkout" element={<Checkout/>} />
-        <Route path="dashboard" element={<Dashboard/>} />
-        <Route path="dashboard/add-products" element={<AddProducts/>} />  
+            <Route path="checkout" element={<Checkout/>} />
+            <Route path="dashboard" element={<Dashboard/>} />
+            <Route path="dashboard/add-products" element={<AddProducts/>} /> 
         </Route>
+         
+            
       
         <Route path="about" element={<About/>}    />
 

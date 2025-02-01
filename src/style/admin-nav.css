@@ -1,0 +1,83 @@
+/* Ensure the header takes full width and has the primary background */
+.admin_header {
+    width: 100%;
+    background: var(--primary-color) !important;  /* Using !important might not be ideal unless necessary */
+    padding: 10px 0; /* Add padding for spacing */
+}
+
+/* For the nav section, make sure it stretches 100% */
+.admin_nav-top {
+    width: 100%;
+}
+
+/* Wrapper for the navigation, aligning items properly */
+.admin_nav-wrapper-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Keeps items spaced out */
+    padding: 0 15px; /* Adds padding to the left and right for better spacing */
+}
+
+/* Logo styling to ensure it looks good in flex layout */
+.logo h2 {
+    font-size: 24px;
+    color: white;
+    margin: 0; /* Removes any default margin for better alignment */
+}
+
+/* Search Box Styles */
+.search_box {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 5px;  /* Make the corners slightly rounded */
+    padding: 5px 15px;
+}
+
+.search_box input {
+    border: none;
+    outline: none;
+    padding: 10px 20px;  /* Increased vertical padding (height) */
+    font-size: 12px;
+    width: 200px;  /* Keep the width fixed, adjust as needed */
+    height: 20px;  /* Increase height for a rectangular look */
+}
+
+.search_box span {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+/* Styling for the right side navigation section */
+.admin_nav-top-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Profile image styles */
+.admin_nav-top-right img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;  /* Circle shape */
+    margin-left: 10px; /* Adds space between the profile image and icons */
+}
+
+/* Default text styles */
+.name {
+    color: white;
+    font-size: 16px; /* Adjust font size */
+    margin-left: 10px; /* Add spacing if needed */
+}
+
+/* Icons (ensure they're positioned well) */
+.admin_nav-top-right span {
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+/* Optional: Add a hover effect for better user interaction */
+.admin_nav-top-right span:hover,
+.search_box span:hover {
+    color: #f1f1f1; /* Lighter color on hover */
+}

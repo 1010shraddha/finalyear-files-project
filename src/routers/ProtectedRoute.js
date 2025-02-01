@@ -17,17 +17,33 @@
 
 // export default ProtectedRoute;
 
+// import { Navigate, Outlet } from "react-router-dom";
+// import useAuth from "../custom-hooks/useAuth";
+
+// const ProtectedRoute = () => {
+//   const { currentUser } = useAuth(); // Get user authentication status
+
+//   console.log("Protected Route - Current User:", currentUser); // Debugging
+
+//   return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
+// };
+
+// export default ProtectedRoute;
 import { Navigate, Outlet } from "react-router-dom";
 import useAuth from "../custom-hooks/useAuth";
 
 const ProtectedRoute = () => {
-  const { currentUser } = useAuth();
+    const { currentUser, loading } = useAuth();
 
-  console.log("Protected Route - Current User:", currentUser); // Debugging
+    if (loading) return <p>Loading...</p>; // Prevent redirect while Firebase loads
 
-  return currentUser ? <Outlet /> : <Navigate to="/login" />;
+    return currentUser ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
+
+
+
+
 
 
