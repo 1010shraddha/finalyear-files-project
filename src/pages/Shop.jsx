@@ -11,6 +11,10 @@ const Shop = () => {
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
+    if (filterValue === "Cabinet") {
+      const filteredProducts = product.filter((item) => item.category === "Cabinet");
+      setProductData(filteredProducts);
+    }
     if (filterValue === "Chair") {
       const filteredProducts = product.filter((item) => item.category === "Chair");
       setProductData(filteredProducts);
@@ -64,6 +68,7 @@ const Shop = () => {
                   <option value="Wardrobe">Wardrobe</option>
                   <option value="Chair">Chair</option>
                   <option value="Table">Table</option>
+                  <option value="Cabinet">Cabinet</option>
                 </select>
               </div>
             </Col>

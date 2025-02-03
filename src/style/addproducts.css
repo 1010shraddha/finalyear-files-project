@@ -1,0 +1,38 @@
+.form_group {
+    margin-bottom: 15px;
+  }
+  
+  .form_group span {
+    color: #d86c43;
+    font-weight: bold;
+    font-size: 19px;
+  }
+  
+  .form_group input, 
+  .form_group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .d-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+  }
+  
+  .w-50 {
+    width: 50%;
+  }
+  
+  .buy_btn {
+    background-color: #0d0d2b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
