@@ -97,7 +97,7 @@ const ProductDetail = () => {
                   <span>{avgRating} ratings</span>
                 </div>
                 <div>
-                  <p className='product__price'>Price: ₹{new Intl.NumberFormat().format(price)}</p>
+                  <p className='product__price'>Price: ₹{new Intl.NumberFormat('en-IN').format(price)}</p>
                   <p>Category: {category}</p>
                 </div>
                 <p className="mt-3">Short Description: {shortDesc}</p>

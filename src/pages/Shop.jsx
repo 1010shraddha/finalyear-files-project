@@ -23,6 +23,14 @@ const Shop = () => {
       const filteredProducts = product.filter((item) => item.category === "Sofa");
       setProductData(filteredProducts);
     }
+    if (filterValue === "Bench") {
+      const filteredProducts = product.filter((item) => item.category === "Bench");
+      setProductData(filteredProducts);
+    }
+    if (filterValue === "Matress") {
+      const filteredProducts = product.filter((item) => item.category === "Matress");
+      setProductData(filteredProducts);
+    }
     // More product filters can be added here
   };
 
@@ -69,6 +77,8 @@ const Shop = () => {
                   <option value="Chair">Chair</option>
                   <option value="Table">Table</option>
                   <option value="Cabinet">Cabinet</option>
+                  <option value="Bench">Bench</option>
+                  <option value="Matress">Matress</option>
                 </select>
               </div>
             </Col>

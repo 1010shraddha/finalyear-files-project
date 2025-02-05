@@ -111,7 +111,7 @@ const Cart = () => {
                                                         <img src={item.imgUrl} alt={item.productName} />
                                                     </td>
                                                     <td>{item.productName}</td>
-                                                    <td>₹{item.price}</td>
+                                                    <td>₹{Number(item.price).toLocaleString('en-IN')}</td>
                                                     <td>{item.quantity}</td>
                                                     <td>
                                                         <i
@@ -124,13 +124,15 @@ const Cart = () => {
                                             ))}
                                         </tbody>
                                     </table>
+                                    
                                 )
                             }
                         </Col>
                         <Col lg="3">
                             <div className="cart-summary">
                                 <h6 className="d-flex align-items-center justify-content-between">Subtotal</h6>
-                                <h4 className="fs-4 fw-bold">₹{totalAmount}</h4>
+                                <h4 className="fs-4 fw-bold">₹{Number(totalAmount).toLocaleString('en-IN')}</h4>
+
                             </div>
                             <div>
                                 <p className="fs-6 mt-2">Taxes and shipping will calculate at checkout</p>
