@@ -28,7 +28,19 @@ import productimg26 from "../image/matress2.jpg";
 import productimg27 from "../image/matress3.jpg";
 import productimg28 from "../image/matress4.jpg";
 import productimg29 from "../image/matress5.jpg";
-// import productimg30 from "../image/";
+import productimg30 from "../image/studytable1.jpeg";
+import productimg31 from "../image/studytable2.jpeg";
+import productimg32 from "../image/studytable3.jpeg";
+import productimg33 from "../image/studytable4.jpeg";
+import productimg34 from "../image/studytable5.jpeg";
+import productimg35 from "../image/studytable6.jpeg";
+import productimg36 from "../image/laptoptable1.jpeg";
+import productimg37 from "../image/laptoptable2.jpeg";
+import productimg38 from "../image/laptoptable3.jpeg";
+import productimg39 from "../image/laptoptable4.jpeg";
+import productimg40 from "../image/laptoptable5.jpeg";
+import productimg41 from "../image/laptoptable6.jpeg";
+// import productimg36 from "../image/";
 
 
 
@@ -403,8 +415,8 @@ const product = [
     shortDesc: " 6 inch King Cotton Mattress  (L x W: 72 inch x 46 inch)",
     description: "Length: 72 inch, Width: 46 inch, Thickness: 6 inch (6 ft x 3 ft 10 in x 6 in)Support Type: Cotton,Comfort Layer: Cotton,Mattress Features: Orthopedic Mattress",
     reviews: [
-      { rating: 3.1, text: " " },
-      { rating: 4, text: "" }
+      { rating: 3.1, text: "Decent quality, but could be softer." },
+      { rating: 4, text: "Comfortable and good value for money." }
     ],
     avgRating: 4,
   },
@@ -418,7 +430,7 @@ const product = [
     description: "Length: 72 inch, Width: 36 inch, Thickness: 5 inch (6 ft x 3 ft x 5 in),Support Type: Cotton,Comfort Layer: Cotton,Mattress Features: Reversible Mattress, Europedic Mattress, Foldable",
     reviews: [
       { rating: 4, text: " Excellent quality and very comfortable." },
-      { rating: 3.4, text: "" }
+      { rating: 3.4, text: "Good for single use, but slightly firm." }
     ],
     avgRating: 4.1,
   },
@@ -432,7 +444,7 @@ const product = [
     description: "Length: 72 inch, Width: 36 inch, Thickness: 5 inch (6 ft x 3 ft x 5 in),Support Type: Cotton,Comfort Layer: Cotton,Mattress Features: Foldable",
     reviews: [
       { rating: 3.5, text: " Excellent quality and very comfortable." },
-      { rating: 3, text: "" }
+      { rating: 3, text: "Average comfort, but durable." }
     ],
     avgRating: 3.5,
   },
@@ -450,22 +462,177 @@ const product = [
     ],
     avgRating: 3.5,
   },
-  // {
-  //   id: "30",
-  //   productName: " Wood Vintage Chair Natural Brown colour",
-  //   imgUrl: productimg30,
-  //   category: "Matress",
-  //   price: 15825,
-  //   shortDesc: ".This Sheesham Wood Vintage Sofa Chair is a versatile addition to your home.",
-  //   description: "Meet our special Sheesham Wood Vintage Sofa Chair in a Natural Brown Color –  This chair is made from really good Sheesham wood, and it's here to add warmth and a touch of class to your home.The natural brown color of the Sheesham wood gives it a rustic look, making it fit in well with any kind of home decoration. The chair has an old-fashioned design that brings a lot of character, and it's strong and durable, so it will last a long time.Material: Acacia wood, stone vinner in door, glass and iron legs,Dimensions: Dimensions in centimeter L 65 x D 70 x H 84 cm Package Contains: 1 Pc Chair",
-  //   reviews: [
-  //     { rating: 4.2, text: " Excellent quality and very comfortable." },
-  //     { rating: 4.9, text: "" }
-  //   ],
-  //   avgRating: 4.1,
-  // },
-
-
+  {
+    id: "30",
+    productName: " Sheesham Wood Office & Study Table ",
+    imgUrl: productimg30,
+    category: "Study Table",
+    price: 15725,
+    shortDesc: " Multi-Shelves, Door, and Drawer Storag| Solid Wood Multipurpose Table  (Free Standing, Finish Color - Honey Finish, Pre-assembled).",
+    description: "Material: Rosewood (Sheesham),Configuration: Straight,Height x Width: 111.76 cm x 114.3 cm (3 ft 7 in x 3 ft 9 in),Storage Included,Pre Assembled (Ready to Use)",
+    reviews: [
+      { rating: 4.1, text: "Great storage space for books" },
+      { rating: 4, text: "Sturdy build and elegant finish." }
+    ],
+    avgRating: 4.2,
+  },
+  {
+    id: "31",
+    productName: "Wood Study Table for Adults | Wooden Desk Computer Table for Home ",
+    imgUrl: productimg31,
+    category: "Study Table",
+    price: 8590,
+    shortDesc: "The study table comes with a basic assembly requirement, allowing you to personalize the setup according to your preferences.",
+    description: "Product Dimensions	55D x 100W x 99H Centimeters,Colour	Natural Finish,Style	Traditional,Base Material	Wood",
+    reviews: [
+      { rating: 4, text: "Well-proportioned height and spacious surface for a comfortable working experience." },
+      { rating: 3.9, text: "Excellent craftsmanship and smooth surface." }
+    ],
+    avgRating: 4.1,
+  },
+  {
+    id: "32",
+    productName: "Wood Study Table for Students",
+    imgUrl: productimg32,
+    category: "Study Table",
+    price: 12749,
+    shortDesc: "Writing Tables Office Desk with 4 Drawer Storage for Home Living Room Library (Honey Finish)",
+    description: "Brand	WOODSTAGE,Product Dimensions	55.9D x 116.8W x 76.2H Centimeters,Colour	Honey Finish,Style	Modern,Base Material	Wood",
+    reviews: [
+      { rating: 4.1, text: "Easy-glide drawers ensure smooth opening and closing. Some models also come with lockable drawers for added security." },
+      { rating: 3.8, text: "Spacious and well-designed for students." }
+    ],
+    avgRating: 4,
+  },
+  {
+    id: "33",
+    productName: "Wood Wall Mounted Folding Writing Table",
+    imgUrl: productimg33,
+    category: "Study Table",
+    price: 15125,
+    shortDesc: "This study table is a great addition to your living space which adds a touch of elegance to your modern decor theme.",
+    description: "Product Dimensions	22.9D x 55.9W x 149.9H Centimeters,Colour	Natural Honey Finish,Style	Modern,Base Material	Wood",
+    reviews: [
+      { rating: 4.2, text: " Fits In Your Space, Fits On Your Budge" },
+      { rating: 4.1, text: "Natural Honey Finish" }
+    ],
+    avgRating: 4,
+  },
+  {
+    id: "34",
+    productName: "study table with its natural finish",
+    imgUrl: productimg34,
+    category: "Study Table",
+    price: 10825,
+    shortDesc: "natural finish and simple, clean structure is the best addition to your office. Made with high quality acacia wood, this table has a simple structure that makes it comfortable and convenient to use.",
+    description: "Dimensions: 145 L X 60 W X 76 H cm,Material: Acacia wood,Finish:Natural finish on wood",
+    reviews: [
+      { rating: 4.2, text: "Acacia wood is known for its strength and resistance to wear, ensuring longevity. " },
+      { rating: 4.9, text: "" }
+    ],
+    avgRating: 4.1,
+  },
+  {
+    id: "35",
+    productName: "Floor Table - Natural",
+    imgUrl: productimg35,
+    category: "Study Table",
+    price: 3825,
+    shortDesc: "This Sheesham Wood Vintage Sofa Chair is a versatile addition to your home.",
+    description: "Dimensions (inches): 19.6 x 15 x 12.4,Recommended Age: 2 - 9 Years,Product Weight (kg): 4",
+    reviews: [
+      { rating: 3.5, text: "Compact and easy to use for kids." },
+    { rating: 4, text: "Durable and lightweight." }
+    ],
+    avgRating: 3.9,
+  },
+  {
+    id: "36",
+    productName: "Floor Table - Natural",
+    imgUrl: productimg36,
+    category: "Laptop Table",
+    price: 1225,
+    shortDesc: " 2 Compartments Brown Genuine Leather Writing Desk Adjustable Height Table Top Elevator ",
+    description: "Dimensions (inches): 19.6 x 15 x 12.4,Recommended Age: 2 - 9 Years,Product Weight (kg): 4",
+    reviews: [
+      { rating: 3.4, text: "Good for small spaces and easy to move." },
+      { rating: 3.5, text: "Solid construction, perfect for working from bed." }
+    ],
+    avgRating: 3.2,
+  },
+  {
+    id: "37",
+    productName: "Rusteak Wood Portable Laptop Table ",
+    imgUrl: productimg37,
+    category: "Laptop Table",
+    price: 5825,
+    shortDesc: "Finish Color - Brown, Pre Assembled",
+    description: "Width 60.96 cm,Height 66.04 cm,Depth 45.72 cm,Weight 44 kg",
+    reviews: [
+      { rating: 3.6, text: "Premium feel but slightly heavy." },
+    { rating: 4, text: "Perfect height and very stable." }
+    ],
+    avgRating: 3.4,
+  },
+  {
+    id: "38",
+    productName: "Wall Mounted Space Saving Desk",
+    imgUrl: productimg38,
+    category: "Laptop Table",
+    price: 3825,
+    shortDesc: "Invisible Bed Foldable Table with Ledge Study Table/Home Office/Laptop Table/Workstation",
+    description: "Height x Width: 40.8 cm x 67.2 cm (1 ft 4 in x 2 ft 2 in),Our desk can be used a multipurpose shelf/ table in your bedroom, study room, kitchen, or living room space",
+    reviews: [
+      { rating: 3.2, text: "Saves space and easy to install." },
+      { rating: 4, text: "Looks elegant and highly functional." }
+    ],
+    avgRating: 3.9,
+  },
+  
+  {
+    id: "39",
+    productName: "Rosewood Wood Portable Laptop Table ",
+    imgUrl: productimg39,
+    category: "Laptop Table",
+    price: 999,
+    shortDesc: "Finish Color - Teak, Pre Assembled",
+    description: "It can be used as laptop table, bed table, kids table etc.Dimensions:Width 43.18 cm,Height 20.32 cm,Depth 35.56 cm,Weight2.8 kg",
+    reviews: [
+      { rating: 3.2, text: "Good for casual use, but a bit small." },
+      { rating: 3.6, text: "Nice finishing and compact design." }
+    ],
+    avgRating: 3.6,
+  },
+  {
+    id: "40",
+    productName: "Solid Wood Portable Laptop table",
+    imgUrl: productimg40,
+    category: "Laptop Table",
+    price: 2125,
+    shortDesc: "Color: Walnut,Material: Teak Wood Base & Top",
+    description: "Foldable legs for easy storage and portability.,Smooth surface for comfortable laptop usage, writing, or eating.Sturdy structure with reinforced joints for stability.",
+    reviews: [
+      { rating: 4.2, text: "Elegant wood finish, sturdy build." },
+      { rating: 4.9, text: "Portable and ideal for a laptop workstation." }
+    ],
+    avgRating: 3.4,
+  },
+  
+  {
+    id: "41",
+    productName: "Solid Wood Portable Laptop Table with Compartment in Honey Oak Finish",
+    imgUrl: productimg41,
+    category: "Laptop Table",
+    price: 2999,
+    shortDesc: "This portable table is crafted from solid mango wood and features a warm honey oak finish",
+    description: "Material: Solid Mango Wood,Finish: Honey OakDimensions: Height: 23 cm, Width: 61 cm, Depth: 36 cmWeight: 2.5 kgDesign: Foldable legs for convenient storage; smooth surface suitable for laptops, writing, or dining",
+    reviews: [
+      { rating: 4, text: "Elegant wood finish, sturdy build." },
+      { rating: 3.8, text: "Compact, stylish, and very practical." }
+    ],
+    avgRating: 4,
+  },
+  
 
 
 ];

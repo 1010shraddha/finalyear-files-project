@@ -31,6 +31,14 @@ const Shop = () => {
       const filteredProducts = product.filter((item) => item.category === "Matress");
       setProductData(filteredProducts);
     }
+    if (filterValue === "Study Table") {
+      const filteredProducts = product.filter((item) => item.category === "Study Table");
+      setProductData(filteredProducts);
+    }
+    if (filterValue === "Laptop Table") {
+      const filteredProducts = product.filter((item) => item.category === "Laptop Table");
+      setProductData(filteredProducts);
+    }
     // More product filters can be added here
   };
 
@@ -72,13 +80,15 @@ const Shop = () => {
                 <select onChange={handleFilter}>
                   <option>Filter By Category</option>
                   <option value="Sofa">Sofa</option>
-                  <option value="Bed">Bed</option>
-                  <option value="Wardrobe">Wardrobe</option>
+                  {/* <option value="Bed">Bed</option>
+                  <option value="Wardrobe">Wardrobe</option> */}
                   <option value="Chair">Chair</option>
                   <option value="Table">Table</option>
                   <option value="Cabinet">Cabinet</option>
                   <option value="Bench">Bench</option>
                   <option value="Matress">Matress</option>
+                  <option value="Study Table">Study Table</option>
+                  <option value="Laptop Table">Laptop Table</option>
                 </select>
               </div>
             </Col>
