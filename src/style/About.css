@@ -4,12 +4,9 @@
   justify-content: center;
   align-items: center;
   height: 150vh; 
-  /* background: url('C:\Users\madhavan.j\Desktop\final\finalyear-files-project\public\about.jpg'); */
-<<<<<<< HEAD
+  /* background: url('C:\Users\madhavan.j\Desktop\final\finalyear-files-project\public\about.jpg');  */
   /* background: url(C:\Users\Ushra\Shrinath\finalyear-files-project\finalyear-files-project\public\about.jpg);   */
-=======
-  background: url(C:\Users\Ushra\january\finalyear-files-project\src\asset\image\about.jpg);  
->>>>>>> 7267ab55efb869d41dbbd731227f8ce317811571
+  background: ('src\asset\image\h2.png'); 
   background-size:auto;
   color: rgb(255, 255, 255);
   text-align: center;
