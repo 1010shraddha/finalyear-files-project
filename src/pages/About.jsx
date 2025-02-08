@@ -1,15 +1,16 @@
 import React from 'react';
 import '../style/About.css';
 
-<style>
+{/* <style>
 @import url('https://fonts.googleapis.com/css2?family=Fenix&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-</style>
+</style> */}
 
 function About() {
   return (
     <div className="About">
       <div className="about-content">
         <h2>About Us</h2>
+        <img src="/about.jpg" alt="About Us" className="about-image" />
         <p>
           Welcome to Shrinath Furnitures, where style meets comfort. Since our inception, we've been dedicated to bringing you the finest in furniture design, quality, and craftsmanship. Whether you're furnishing your first home, updating a single room, or looking for that perfect statement piece, we have something special just for you.
 
