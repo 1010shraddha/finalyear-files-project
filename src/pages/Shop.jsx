@@ -39,6 +39,23 @@ const Shop = () => {
       const filteredProducts = product.filter((item) => item.category === "Laptop Table");
       setProductData(filteredProducts);
     }
+
+    if (filterValue === "Single Door Cupboard") {
+      const filteredProducts = product.filter((item) => item.category === "Single Door Cupboard");
+      setProductData(filteredProducts);
+    }
+
+    
+    if (filterValue === "Single Sized Bed") {
+      const filteredProducts = product.filter((item) => item.category === "Single Sized Bed");
+      setProductData(filteredProducts);
+    }
+
+    if (filterValue === "Double Sized Bed") {
+      const filteredProducts = product.filter((item) => item.category === "Double Sized Bed");
+      setProductData(filteredProducts);
+    }
+
     // More product filters can be added here
   };
 
@@ -89,6 +106,10 @@ const Shop = () => {
                   <option value="Matress">Matress</option>
                   <option value="Study Table">Study Table</option>
                   <option value="Laptop Table">Laptop Table</option>
+                  <option value="Single Door Cupboard">Single Door Cupboard</option>
+                  <option value="Double Door Cupboard">Double Door Cupboard</option>
+                  <option value="Single Sized Bed">Single Sized Bed</option>
+                  <option value="Double Sized Bed">Double Sized Bed</option>
                 </select>
               </div>
             </Col>

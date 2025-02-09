@@ -40,10 +40,28 @@ import productimg38 from "../image/laptoptable3.jpeg";
 import productimg39 from "../image/laptoptable4.jpeg";
 import productimg40 from "../image/laptoptable5.jpeg";
 import productimg41 from "../image/laptoptable6.jpeg";
+import productimg42 from "../image/singlecupboard1.jpeg";
+import productimg43 from "../image/singlecupboard2.jpeg";
+import productimg44 from "../image/singlecupboard3.jpeg";
+import productimg45 from "../image/singlecupboard4.jpeg";
+import productimg46 from "../image/singlecupboard5.jpeg";
+import productimg47 from "../image/doublecupboard1.jpeg";
+import productimg48 from "../image/doublecupboard2.jpeg";
+import productimg49 from "../image/doublecupboard3.jpeg";
+import productimg50 from "../image/doublecupboard4.jpeg";
+import productimg51 from "../image/doublecupboard5.jpeg";
+import productimg52 from "../image/singlebed1.jpeg";
+import productimg53 from "../image/singlebed2.jpeg";
+import productimg54 from "../image/singlebed3.jpeg";
+import productimg55 from "../image/singlebed4.jpeg";
+import productimg56 from "../image/singlebed5.jpeg";
+import productimg57 from "../image/doublebed1.jpeg";
+import productimg58 from "../image/doublebed2.jpeg";
+import productimg59 from "../image/doublebed3.jpeg";
+import productimg60 from "../image/doublebed4.jpeg";
+import productimg61 from "../image/doublebed5.jpeg";
+import productimg62 from "../image/doublebed6.jpeg";
 // import productimg36 from "../image/";
-
-
-
 
 
 const product = [
@@ -631,6 +649,317 @@ const product = [
       { rating: 3.8, text: "Compact, stylish, and very practical." }
     ],
     avgRating: 4,
+  },
+
+  {
+    id: "42",
+    productName: "Budget King Wooden Cupboard",
+    imgUrl: productimg42,
+    category: "Single Door Cupboard",
+    price: 3500,
+    shortDesc: "A strong and affordable wooden cupboard for daily use",
+    description: "This cupboard is designed for budget-conscious buyers who need reliable storage. It features a durable wooden structure with basic compartments for clothes and essentials.",
+    reviews: [
+      { rating: 4, text: "Customers appreciate its affordability and sturdiness but note that it lacks decorative element" },
+      { rating: 3.8, text: "Compact." }
+    ],
+    avgRating: 4,
+  },
+
+  {
+    id: "43",
+    productName: "Majboot Lakdi Almirah",
+    imgUrl: productimg43,
+    category: "Single Door Cupboard",
+    price: 4000,
+    shortDesc: " A durable, solid wooden almirah for long-term use.",
+    description: " Built with strong wood, this almirah provides safe storage for household items. Its simple design ensures longevity and easy maintenance, making it ideal for small spaces.",
+    reviews: [
+      { rating: 4, text: "Elegant wood finish" },
+      { rating: 3.9, text: " Customers praise its simple structure." }
+    ],
+    avgRating: 4.1,
+  },
+
+  {
+    id: "44",
+    productName: "Bharosa Wooden Wardrobe",
+    imgUrl: productimg44,
+    category: "Single Door Cupboard",
+    price: 3800,
+    shortDesc: "A trusted and secure wooden cupboard for daily storage.",
+    description: "This wooden wardrobe offers ample space with shelves for organizing clothes and other essentials. Its simple yet effective locking system adds security",
+    reviews: [
+      { rating: 4, text: "Elegant wood finish" },
+      { rating: 4.2, text: " Its spacious design but suggest improvements in finishing.." }
+    ],
+    avgRating: 4.3,
+  },
+
+  {
+    id: "45",
+    productName: "Single Door Wardrobe with Mirror",
+    imgUrl: productimg45,
+    category: "Single Door Cupboard",
+    price: 6500,
+    shortDesc: " A functional single-door wardrobe equipped with a mirror and multiple storage options.",
+    description: "This wardrobe combines utility and style, featuring a full-length mirror on the door and internal compartments for organized storage.",
+    reviews: [
+      { rating: 4.4, text: "its practicality and space-saving design, making it a valuable addition to bedrooms." },
+      { rating: 4.3, text: "Great Finish" }
+    ],
+    avgRating: 4.4,
+  },
+
+  {
+    id: "46",
+    productName: "Single Door Wardrobe with Double Drawer",
+    imgUrl: productimg46,
+    category: "Single Door Cupboard",
+    price: 7000,
+    shortDesc: " A mahogany-finished single-door wardrobe featuring double drawers for additional storage",
+    description: " This wardrobe boasts a rich mahogany finish, a single door for main storage, and two additional drawers at the bottom, providing versatile storage solutions.",
+    reviews: [
+      { rating: 4.5, text: "its elegant design and functional storage options, making it a stylish addition to bedrooms" },
+      { rating: 4.4, text: "very practical." }
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "47",
+    productName: " Sheesham Majboot Almirah (Double Door) ",
+    imgUrl: productimg47,
+    category: "Double Door Cupboard",
+    price: 12500,
+    shortDesc: " A sturdy Sheesham wood cupboard with a traditional design",
+    description: "  Crafted from premium Sheesham wood, this double-door cupboard offers durability and ample storage. It features an intricate cutwork design at the bottom for ventilation, making it both functional and stylish.",
+    reviews: [
+      { rating: 4.5, text: " its high-quality wood and design but mention it is slightly heavy to move." },
+      { rating: 4.4, text: "Good Durability" }
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "48",
+    productName: "Modern Blackwood Wardrobe",
+    imgUrl: productimg48,
+    category: "Double Door Cupboard",
+    price: 12500,
+    shortDesc: " A stylish and spacious blackwood-finish cupboard with multiple shelves.",
+    description: " Designed for modern homes, this double-door wardrobe offers a sleek, dark wood finish. It includes a hanging rod, multiple shelves for organization, and a built-in drawer for storing smaller essentials. The sturdy construction ensures durability while maintaining a premium look.",
+    reviews: [
+      { rating: 4.8, text: " its contemporary design and storage capacity but mention that assembly may take some time." },
+      { rating: 4.4, text: "Great Work!!" }
+    ],
+    avgRating: 4.7,
+  },
+
+  {
+    id: "49",
+    productName: " Premium Walnut Storage Almirah",
+    imgUrl: productimg49,
+    category: "Double Door Cupboard",
+    price: 12000,
+    shortDesc: " A luxurious walnut wood cupboard with extra shelves for superior organization.",
+    description: " This premium wardrobe is made of high-quality walnut wood with a rich finish. It includes a hanging rod, spacious shelves, and a built-in drawer for additional convenience. Designed to last, it’s perfect for homes looking for a mix of durability and elegance.",
+    reviews: [
+      { rating: 4.8, text: "its elegant design and functional storage options, making it a stylish addition to bedrooms" },
+      { rating: 4.8, text: "love its premium feel and strong build but mention it requires careful maintenance to retain its shine." }
+    ],
+    avgRating: 4.8,
+  },
+
+
+  {
+    id: "50",
+    productName: "Classic Elegance Wardrobe",
+    imgUrl: productimg50,
+    category: "Double Door Cupboard",
+    price: 9800,
+    shortDesc: " A simple yet elegant brown wooden wardrobe with ample storage space.",
+    description: " Featuring a warm brown finish, this cupboard is designed for both functionality and aesthetics. It comes with spacious shelves. Ideal for small to medium-sized homes..",
+    reviews: [
+      { rating: 3.8, text: "I liked the product" },
+      { rating: 3, text: "Customers love its affordability and sturdy build but mention that the inner compartments could be slightly bigger." }
+    ],
+    avgRating: 3.5,
+  },
+
+  {
+    id: "51",
+    productName: "Urban Matte Finish Wardrobe",
+    imgUrl: productimg51,
+    category: "Double Door Cupboard",
+    price: 11200,
+    shortDesc: " A modern dark matte-finish wardrobe with sleek handles and efficient storage.",
+    description: " Crafted with a contemporary matte finish, this cupboard blends seamlessly into modern interiors. It features multiple compartments, including a top shelf for extra storage, a pull-out drawer, and organized sections for clothes and accessories.",
+    reviews: [
+      { rating: 4.5, text: "its elegant design and functional storage options, making it a stylish addition to bedrooms" },
+      { rating: 4.4, text: "The smooth finish and stylish look but suggest adding more depth to the storage compartments." }
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "52",
+    productName: "Sandal Single Bed (Elegant Single Bed)",
+    imgUrl: productimg52,
+    category: "Single Sized Bed",
+    price: 7200,
+    shortDesc: "  A beautifully designed single bed with a smooth finish.",
+    description: " Crafted with high-quality wood, this single bed features a sleek and polished design that enhances any room’s aesthetics. Its sturdy frame ensures long-lasting durability, making it a reliable choice for daily use",
+    reviews: [
+      { rating: 3.5, text: "smooth finish but mention that assembly takes some time." },
+      { rating: 3.4, text: "Good" }
+    ],
+    avgRating: 3.5,
+  },
+
+  {
+    id: "53",
+    productName: "Majili Palang (Compact Bed for Small Spaces)",
+    imgUrl: productimg53,
+    category: "Single Sized Bed",
+    price: 6000,
+    shortDesc: " A space-saving wooden bed perfect for compact rooms.",
+    description: "Despite its compact size, it offers excellent support and durability, making it ideal for daily use. The simple yet sturdy structure makes it a great choice for students and bachelors.",
+    reviews: [
+      { rating: 3.1, text: "Compact addition to bedrooms" },
+      { rating: 2.9, text: "love its compact design and affordability, but some suggest adding a headboard for better comfort." }
+    ],
+    avgRating: 3.0,
+  },
+
+  {
+    id: "54",
+    productName: " Sasta Sundar Single Bed (Affordable & Beautiful Bed)",
+    imgUrl: productimg54,
+    category: "Single Sized Bed",
+    price: 5800,
+    shortDesc: "A budget-friendly yet stylish wooden bed for comfort.",
+    description: " This wooden single bed offers a perfect blend of affordability and durability. Its simple design suits all types of interiors, making it ideal for homes looking for a cost-effective sleeping solution",
+    reviews: [
+      { rating: 4.5, text: "appreciate its sturdy frame and reasonable price but mention it is best suited for lightweight use." },
+      { rating: 4.4, text: "The smooth finish and stylish look but suggest adding the storage compartments." }
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "55",
+    productName: "Bunkar Storage Bed (Carpenter-Made Storage Bed)",
+    imgUrl: productimg55,
+    category: "Single Sized Bed",
+    price: 8500,
+    shortDesc: " A handcrafted wooden bed with under-bed storage.",
+    description: "  Designed with traditional craftsmanship, this single wooden bed features built-in storage drawers underneath. It maximizes space while providing a strong and comfortable sleeping platform.",
+    reviews: [
+      { rating: 4.2, text: "A stylish addition to bedrooms" },
+      { rating: 4.4, text: " the storage feature but mention that the drawers could be smoother." }
+    ],
+    avgRating: 4.4,
+  },
+
+  {
+    id: "56",
+    productName: "Do Tijori Storage Bed (Two-Compartment Storage Bed)",
+    imgUrl: productimg56,
+    category: "Single Sized Bed",
+    price: 9500,
+    shortDesc: "A strong wooden bed with two spacious storage compartments",
+    description: " This bed comes with two built-in storage compartments under the mattress, perfect for storing clothes, blankets, and other essentials. Made from premium wood, it offers durability and a sleek design that fits all types of homes.",
+    reviews: [
+      { rating: 4.5, text: "its elegant design and functional storage option" },
+      { rating: 4.4, text: " love its large storage space and sturdy frame but mention that the storage doors could be smoother." }
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "57",
+    productName: "King Size Tijori Bed (King Size Storage Bed)",
+    imgUrl: productimg57,
+    category: "Double Sized Bed",
+    price: 24500,
+    shortDesc: " A high-end king-size bed with large storage compartments and premium finish.",
+    description: " This bed is designed for those who need both luxury and functionality. With multiple storage drawers, a large under-bed compartment, and an elegant wood finish, it is perfect for modern homes.",
+    reviews: [
+      { rating: 4.2, text: "love its spacious storage and premium look but mention that it requires a large space for setup." },
+    ],
+    avgRating: 4.2,
+  },
+
+  {
+    id: "58",
+    productName: "Majboot Box Storage Bed (Strong Box Storage Bed)",
+    imgUrl: productimg58,
+    category: "Double Sized Bed",
+    price: 16900,
+    shortDesc: " A durable wooden bed with a deep box storage system",
+    description: " Built for long-term use, this wooden bed comes with a full under-bed storage box, providing ample space for storing household essentials. Its simple yet sturdy design makes it a great choice for everyday use.",
+    reviews: [
+      { rating: 4.5, text: "love the deep storage space but suggest adding an easy-lift mechanism for better accessibility." },
+    ],
+    avgRating: 4.5,
+  },
+
+  {
+    id: "59",
+    productName: "Smart Sheesham Storage Bed (Multipurpose Storage Double Bed)",
+    imgUrl: productimg59,
+    category: "Double Sized Bed",
+    price: 22000,
+    shortDesc: "A luxurious Sheesham wood bed with a combination of storage drawers and open shelves.",
+    description: " This bed offers a smart mix of deep storage drawers, side shelves, and a headboard compartment. Ideal for families looking for extra storage space without compromising on style. The rich Sheesham wood finish gives it a premium and elegant look.",
+    reviews: [
+      { rating: 4.8, text: "appreciate the combination of different storage types but mention that the bed is heavy and requires careful placement." },
+     
+    ],
+    avgRating: 4.8,
+  },
+
+  {
+    id: "60",
+    productName: "Classic Palang (Traditional Wooden Double Bed)",
+    imgUrl: productimg60,
+    category: "Double Sized Bed",
+    price: 10800,
+    shortDesc: " A timeless wooden bed with a traditional design.",
+    description: " Crafted from strong engineered wood, this bed features a classic design that blends well with all interiors. Its durable frame ensures stability, and the headboard provides comfortable support.",
+    reviews: [
+      { rating: 4.0, text: "like its simplicity and affordability but suggest adding a mattress with good cushioning." },
+    ],
+    avgRating: 4.0,
+  },
+
+  {
+    id: "61",
+    productName: "Luxury Comfort Storage Bed (Bed with Mattress & Storage)",
+    imgUrl: productimg61,
+    category: "Double Sized Bed",
+    price: 22500,
+    shortDesc: "A complete package with a high-quality mattress and spacious storage.",
+    description: " This premium wooden bed comes with a high-density foam mattress for extra comfort and a large storage compartment under the bed. The hydraulic lift-up mechanism allows easy access to the storage space, making it perfect for organizing blankets, clothes, and household items. The elegant wooden finish adds a luxurious touch to your bedroom.",
+    reviews: [
+      { rating: 4.8, text: " the comfortable mattress and easy-to-use storage system, but some suggest checking the mattress firmness before purchase." },
+    ],
+    avgRating: 4.8,
+  },
+
+  {
+    id: "62",
+    productName: "Chhupa Khazana Bed (Hidden Treasure Storage Bed)",
+    imgUrl: productimg62,
+    category: "Double Sized Bed",
+    price: 18500,
+    shortDesc: " A stylish bed with a lift-up hydraulic storage system.",
+    description: " This modern storage bed features a hydraulic lift mechanism, making it easy to access the under-bed storage. The deep compartment allows you to store large household items without cluttering your room. Its elegant finish adds a premium touch to any bedroom.",
+    reviews: [
+      { rating: 4.2, text: " appreciate the easy-to-lift hydraulic system but suggest ensuring proper installation for smooth operation." },
+    ],
+    avgRating: 4.2,
   },
   
 
