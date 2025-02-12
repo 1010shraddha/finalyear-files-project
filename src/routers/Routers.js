@@ -8,6 +8,7 @@ import Checkout from "../pages/Checkout";
 import Login from "../pages/Login";
 import Cart from "../pages/Cart";
 import About from "../pages/About";
+import Privacy from '../pages/Privacy';
 import ProductDetail from '../pages/ProductDetail';
 import ProtectedRoute from './ProtectedRoute';
 
@@ -40,6 +41,8 @@ const Routers = () => {
             
       
         <Route path="about" element={<About/>}    />
+        <Route path="privacy-policy" element={<Privacy/>}    />
+       
 
     </Routes>
     );

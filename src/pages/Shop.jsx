@@ -44,6 +44,11 @@ const Shop = () => {
       const filteredProducts = product.filter((item) => item.category === "Single Door Cupboard");
       setProductData(filteredProducts);
     }
+    if (filterValue === "Double Door Cupboard") {
+      const filteredProducts = product.filter((item) => item.category === "Double Door Cupboard");
+      setProductData(filteredProducts);
+    }
+
 
     
     if (filterValue === "Single Sized Bed") {
