@@ -9,11 +9,15 @@ import Login from "../pages/Login";
 import Cart from "../pages/Cart";
 import About from "../pages/About";
 import Privacy from '../pages/Privacy';
+import Wishlist from '../pages/Wishlist';
 import ProductDetail from '../pages/ProductDetail';
 import ProtectedRoute from './ProtectedRoute';
 
 import AddProducts from '../admin/AddProducts';
 import Dashboard from '../admin/Dashboard';
+
+
+
 
 
 const Routers = () => {
@@ -31,6 +35,7 @@ const Routers = () => {
     }    /> */}
         <Route path="login" element={<Login />}    />
         <Route path="cart" element={<Cart />}    />
+        
 
         <Route path="/*" element={<ProtectedRoute/>}>
             <Route path="checkout" element={<Checkout/>} />
@@ -42,6 +47,12 @@ const Routers = () => {
       
         <Route path="about" element={<About/>}    />
         <Route path="privacy-policy" element={<Privacy/>}    />
+        <Route path="wishlist" element={<Wishlist/>} />
+
+        
+       
+       
+        
        
 
     </Routes>

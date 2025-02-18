@@ -194,6 +194,12 @@ position: sticky;
   cursor: pointer !important;
   color: #333;
 }
+.nav__icon .fav__icon.nav__active, /* Add this line to highlight the wishlist icon when active */
+.nav__icon .cart__icon.nav__active {
+  color: #007bff; /* Highlight color */
+  font-weight: bold; /* Bold to emphasize */
+}
+
 
 
 /* Media queries for responsiveness */
@@ -216,6 +222,7 @@ position: sticky;
   padding: 15px 0; /* Reduced padding when sticky */
   box-shadow: 0 2px 5px #F9E79F; /* Optional: add a shadow for better visibility */
 }
+
 
 @media only screen and (max-width: 768px) {
   .navigation{

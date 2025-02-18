@@ -1,83 +1,4 @@
- /* .product__details{
-    margin-top:50px;
-}
-.product__details h2{
-   font-size:1.6rem;
-   margin-bottom:10px; 
-}
-.product__rating span i{
-    color: coral;
 
-}
-.product__rating p span{
-    color: coral !important; 
-    font-weight:500px;
-
-}
-.product__price{
-    font-size:1.2rem;
-    font-weight:400;
-}
-.tab__wrapper{
-    margin-top:20px;
-    color:var(--primary-color);
-    font-weight: 500;
-    font-size:1rem;
-    cursor: pointer;
-}
-.active__tab{
-font-weight: 600;
-}
-.tab__content p{
-    line-height: 30px;
-}
-.review__wrapper ul li span{
-color:coral;
-font-weight: 500;
-}
-.review__wrapper ul li p{
-    margin-top: 10px;
-} 
-.review__form{
-  width: 70%;
-  margin:auto;
-  margin-top: 50px;
-}
-.review__form h4{
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-.form__group input,.form__group textarea{
-  width:100px;
-  border: 1px solid var(--primary-color);
-  border-radius: 5px;
-  padding:10px 20px;
-}
-.form__group input:focus,
-.form__group textarea:focus{
-  outline:none ;
-}
-.form__group{
-  margin-bottom: 30px;
-}
-
-.form__group span{
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  color:coral;
-  font-weight: 600;
-  cursor:pointer;
-}
-
-.related__title{
-  font-size: 1.2rem;
-  font-weight:600;
-  margin-top: 50px;
-} */
- /* Basic styling */
-/* General Body Styling */
 .body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -242,6 +163,29 @@ font-weight: 500;
   color: #333;
   text-align: center;
 }
+.wishlist__icon {
+  font-size: 2.5rem; /* Increase size */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+/* When the wishlist item is active, apply a gradient text effect */
+.wishlist__icon.liked {
+  background: linear-gradient(45deg, #ff66b2, #ff3399); /* Gradient color */
+  -webkit-background-clip: text; /* WebKit-based browsers */
+  background-clip: text; /* Standard property for broader compatibility */
+  color: transparent; /* Make the text transparent to show the gradient */
+}
+
+
+/* Default heart color when not in the wishlist */
+.wishlist__icon.ri-heart-line {
+  color: #555; /* Slightly muted grey for the empty heart */
+}
+
+.wishlist__icon.ri-heart-fill {
+  color: #ff3366; /* Vibrant pink/red color when filled heart */
+}
+
 
 /* Responsiveness */
 @media (max-width: 768px) {

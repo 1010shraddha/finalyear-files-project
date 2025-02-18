@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";  // Add useLocation here
 import "./header.css";
 import logo from "../../asset/image/logo2.jpg";
 import usericon from "../../asset/image/add-friend.png";
@@ -23,7 +23,9 @@ const Header = () => {
     const headerRef = useRef(null);
     const menuRef = useRef(null);
     const navigate = useNavigate();
+    const location = useLocation();  // Use useLocation hook here to access the current pathname
     const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+    const wishlistItems = useSelector((state) => state.wishlist.items); // Get wishlist items
     const profileActionRef = useRef(null);
     const { currentUser } = useAuth();
 
@@ -79,7 +81,6 @@ const Header = () => {
                             <img src={logo} alt="Shrinath Furnitures Logo" />
                             <div>
                                 <h1>Shrinath Furnitures</h1>
-                               
                             </div>
                         </div>
 
@@ -101,14 +102,21 @@ const Header = () => {
                         </div>
 
                         <div className="nav__icon">
-                            <span className="fav__icon">
+                            {/* Wishlist Icon */}
+                            <span
+                                className={`fav__icon ${location.pathname === "/wishlist" ? "nav__active" : ""}`}  // Highlight if on /wishlist page
+                                onClick={() => navigate("/wishlist")}
+                            >
                                 <i className="ri-heart-line"></i>
-                                <span className="badge">1</span>
+                                {/* Display the number of items in the wishlist */}
+                                {wishlistItems.length > 0 && <span className="badge">{wishlistItems.length}</span>}
                             </span>
 
+                            {/* Cart Icon */}
                             <span className="cart__icon" onClick={navigateToCart}>
                                 <i className="ri-shopping-cart-fill"></i>
-                                <span className="badge">{totalQuantity}</span>
+                                {/* Display the badge only if totalQuantity is greater than 0 */}
+                                {totalQuantity > 0 && <span className="badge">{totalQuantity}</span>}
                             </span>
 
                             <div className="profile">
@@ -121,22 +129,18 @@ const Header = () => {
                                     onClick={toggleProfileActions}
                                 />
                                 <div
-                                    className={`profile__actions ${
-                                        showActions ? "show__profileActions" : ""
-                                    }`}
+                                    className={`profile__actions ${showActions ? "show__profileActions" : ""}`}
                                     ref={profileActionRef}
-                                 >  
-                                 {/* //src\admin\Dashboard.jsx  //src\components\Header\Header.jsx */}
+                                >
                                     {currentUser ? (
-                                       <div>         
-                                       <Link to="#" onClick={logout} className="logout-link">Logout</Link>
-                                       </div>
+                                        <div>
+                                            <Link to="#" onClick={logout} className="logout-link">Logout</Link>
+                                        </div>
                                     ) : (
                                         <div>
                                             <Link to="/signup" onClick={handleActionClick}>
                                                 Signup
                                             </Link>
-                                           
                                             <Link to="/login" onClick={handleActionClick}>
                                                 Login
                                             </Link>

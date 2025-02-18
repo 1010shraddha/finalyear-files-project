@@ -7,8 +7,9 @@ import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/UI/CommonSection';
 import { motion } from "framer-motion";
 import ProductsList from '../components/UI/ProductList';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../redux/slices/cartSlice';
+import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
 import { toast } from 'react-toastify';
 
 const ProductDetail = () => {
@@ -21,6 +22,8 @@ const ProductDetail = () => {
   const { id } = useParams();
   const product = products.find(item => item.id === id);
   const { imgUrl, productName, price, avgRating, description, shortDesc, category } = product;
+
+  const wishlistItems = useSelector(state => state.wishlist.items);
 
   useEffect(() => {
     // Load reviews from local storage if available
@@ -60,7 +63,7 @@ const ProductDetail = () => {
     dispatch(
       cartActions.addItem({
         id,
-        imgUrl: imgUrl,
+        imgUrl,
         productName,
         price,
       })
@@ -68,11 +71,29 @@ const ProductDetail = () => {
     toast.success("Product added successfully");
   };
 
+  const toggleWishlistHandler = () => {
+    const productExists = wishlistItems.find(item => item.id === id);
+    if (productExists) {
+      dispatch(removeFromWishlist(id)); // Remove from wishlist
+      toast.success("Product removed from wishlist!");
+    } else {
+      dispatch(addToWishlist({
+        id,
+        imgUrl,
+        productName,
+        price,
+      }));
+      toast.success("Product added to wishlist!");
+    }
+  };
+
   const relatedProducts = products.filter(item => item.category === category);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [product]);
+
+  const isInWishlist = wishlistItems.some(item => item.id === id); // Check if product is in wishlist
 
   return (
     <Helmet title={productName}>
@@ -101,13 +122,25 @@ const ProductDetail = () => {
                   <p>Category: {category}</p>
                 </div>
                 <p className="mt-3">Short Description: {shortDesc}</p>
-                <motion.button 
-                  whileTap={{ scale: 1.2 }} 
-                  className="buy__btn" 
-                  onClick={addToCart}
-                >
-                  Add to Cart
-                </motion.button>
+
+                {/* Action buttons container */}
+                <div className="product__actions d-flex align-items-center gap-3">
+                  <motion.button 
+                    whileTap={{ scale: 1.2 }} 
+                    className="buy__btn" 
+                    onClick={addToCart}
+                  >
+                    Add to Cart
+                  </motion.button>
+
+                  {/* Wishlist Icon */}
+                  <motion.i
+                    whileTap={{ scale: 1.2 }}
+                    className={`ri-heart-${isInWishlist ? 'fill' : 'line'} wishlist__icon ${isInWishlist ? 'liked' : ''}`}
+                    onClick={toggleWishlistHandler}
+                    style={{ cursor: 'pointer', fontSize: '24px' }}
+                  ></motion.i>
+                </div>
               </div>
             </Col>
           </Row>
@@ -120,7 +153,7 @@ const ProductDetail = () => {
             <Col lg="12">
               <div className="tab__wrapper d-flex align-items-center gap-5">
                 <h6 className={`${tab === 'desc' ? 'active__tab' : ''}`} onClick={() => setTab('desc')}>Description</h6>
-                <h6 className={`${tab === 'rev' ? 'active__tab' : ''}`} onClick={() => setTab('rev')}>
+                <h6 className={`${tab === 'rev' ? 'active__tab' : ''}`} onClick={() => setTab('rev')} >
                   Reviews ({reviews.length})
                 </h6>
               </div>
@@ -146,28 +179,18 @@ const ProductDetail = () => {
                       <h4>Comment your Experience</h4>
                       <form onSubmit={submitHandler}>
                         <div className='form__group'>
-                          <input type="text" placeholder="Enter Name" ref={reviewUser}  required/>
+                          <input type="text" placeholder="Enter Name" ref={reviewUser} required />
                         </div>
                         <div className='form__group d-flex align-items-center gap-3 rating__group'>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(1)}>
-                            1<i className="ri-star-s-fill"></i> 
-                          </motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(2)}>
-                            2<i className="ri-star-s-fill"></i> 
-                          </motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(3)}>
-                            3<i className="ri-star-s-fill"></i> 
-                          </motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(4)}>
-                            4<i className="ri-star-s-fill"></i> 
-                          </motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(5)}>
-                            5<i className="ri-star-s-fill"></i> 
-                          </motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(1)}>1<i className="ri-star-s-fill"></i></motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(2)}>2<i className="ri-star-s-fill"></i></motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(3)}>3<i className="ri-star-s-fill"></i></motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(4)}>4<i className="ri-star-s-fill"></i></motion.span>
+                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(5)}>5<i className="ri-star-s-fill"></i></motion.span>
                         </div>
 
                         <div className='form__group'>
-                          <textarea ref={reviewMsg} rows={4} type="text" placeholder="Review Message ...." required />
+                          <textarea ref={reviewMsg} rows={4} placeholder="Review Message ...." required />
                         </div>
                         <motion.button whileTap={{ scale: 1.2 }} type="submit" className="buy__btn">Submit</motion.button>
                       </form>
