@@ -156,9 +156,8 @@ import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { setDoc, doc } from "firebase/firestore";
-import { db, auth, storage } from "../firebase.config";
+import { db, auth } from "../firebase.config";
 import { toast } from "react-toastify";
 import "../style/login.css";
 
@@ -171,72 +170,68 @@ const Signup = () => {
 
   const navigate = useNavigate();
 
+  // Upload image to Cloudinary
+  const uploadToCloudinary = async (file) => {
+    if (!file) return null;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "your_upload_preset"); // Replace with actual upload preset
+    formData.append("cloud_name", "your_cloud_name"); // Replace with actual Cloudinary cloud name
+
+    try {
+      const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Failed to upload image");
+
+      const data = await response.json();
+      return data.secure_url; // Return uploaded image URL
+    } catch (error) {
+      console.error("Cloudinary upload failed:", error);
+      toast.error("Image upload failed. Please try again.");
+      return null;
+    }
+  };
+
+  // Handle user signup
   const signup = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      // Create user with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-
-      // Handle file upload if a file is selected
+      
+      let photoURL = "";
       if (file) {
-        const storageRef = ref(storage, `images/${Date.now()}_${username}`);
-        const uploadTask = uploadBytesResumable(storageRef, file);
-
-        uploadTask.on(
-          "state_changed",
-          null,
-          (error) => {
-            setLoading(false);
-            toast.error(error.message); // Show upload error
-          },
-          async () => {
-            // Get file's download URL
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-
-            // Update user profile
-            await updateProfile(user, {
-              displayName: username,
-              photoURL: downloadURL,
-            });
-
-            // Save user info to Firestore
-            await setDoc(doc(db, "users", user.uid), {
-              uid: user.uid,
-              displayName: username,
-              email,
-              photoURL: downloadURL,
-            });
-
-            toast.success("Account created successfully!");
-            navigate("/login");
-          }
-        );
-      } else {
-        // If no file is uploaded, update profile without photo
-        await updateProfile(user, { displayName: username });
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          displayName: username,
-          email,
-          photoURL: null,
-        });
-
-        toast.success("Account created successfully!");
-        navigate("/login");
+        photoURL = await uploadToCloudinary(file);
       }
+
+      // Update user profile in Firebase Auth
+      await updateProfile(user, {
+        displayName: username,
+        photoURL: photoURL || "",
+      });
+
+      // Save user details to Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName: username,
+        email,
+        photoURL: photoURL || "",
+      });
+
+      toast.success("Account created successfully!");
+      navigate("/login");
     } catch (error) {
-      setLoading(false);
-      toast.error(error.message);
+      console.error("Signup error:", error);
+      toast.error(error.message || "Signup failed. Please try again.");
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
   };
 
   return (
@@ -283,21 +278,17 @@ const Signup = () => {
                     />
                   </FormGroup>
 
-                  {/* <FormGroup className="form__group d-flex align-items-center">
+                  <FormGroup className="form__group d-flex align-items-center">
                     <label className="custom-file-upload me-3">
                       Choose File
-                      <input type="file" onChange={handleFileChange} hidden />
+                      <input type="file" onChange={(e) => setFile(e.target.files[0])} hidden />
                     </label>
                     <span className="file-name">
-                      {file ? file.name : "No file chosen"}     
+                      {file ? file.name : "No file chosen"}
                     </span>
-                  </FormGroup> */}
+                  </FormGroup>
 
-                  <button
-                    type="submit"
-                    className="buy__btn auth__btn"
-                    disabled={loading}
-                  >
+                  <button type="submit" className="buy__btn auth__btn" disabled={loading}>
                     {loading ? "Creating Account..." : "Create an Account"}
                   </button>
                   <p>
@@ -314,4 +305,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
