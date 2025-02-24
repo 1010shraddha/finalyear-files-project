@@ -130,7 +130,6 @@
 // }
 
 // export default AddProducts
-
 import React, { useState } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import "../style/addproducts.css";
@@ -150,18 +149,24 @@ const AddProducts = () => {
 
   // Upload Image to Cloudinary
   const uploadToCloudinary = async (file) => {
+    if (!file) {
+      toast.error("Please select an image.");
+      return null;
+    }
+
     const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // Change to your Cloudinary upload preset
+    formData.append("file",file );
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
     try {
       const response = await fetch(
-        "https://api.cloudinary.com/v1_1/your_cloud_name/image/upload",
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
         {
           method: "POST",
           body: formData,
         }
       );
+
       const data = await response.json();
 
       if (!data.secure_url) {
@@ -270,11 +275,16 @@ const AddProducts = () => {
                     required
                   >
                     <option value="Chair">Chair</option>
-                    <option value="Sofa">Sofa</option>
-                    <option value="Cabinet">Cabinet</option>
-                    <option value="Bench">Bench</option>
-                    <option value="Mattress">Mattress</option>
-                    <option value="Study Table">Study Table</option>
+                  <option value="Table">Table</option>
+                  <option value="Cabinet">Cabinet</option>
+                  <option value="Bench">Bench</option>
+                  <option value="Mattress">Mattress</option>
+                  <option value="Study Table">Study Table</option>
+                  <option value="Laptop Table">Laptop Table</option>
+                  <option value="Single Door Cupboard">Single Door Cupboard</option>
+                  <option value="Double Door Cupboard">Double Door Cupboard</option>
+                  <option value="Single Sized Bed">Single Sized Bed</option>
+                  <option value="Double Sized Bed">Double Sized Bed</option>
                   </select>
                 </FormGroup>
               </div>
@@ -284,7 +294,11 @@ const AddProducts = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => setEnterProductImg(e.target.files[0])}
+                  onChange={(e) => {
+                    if (e.target.files.length > 0) {
+                      setEnterProductImg(e.target.files[0]);
+                    }
+                  }}
                   required
                 />
               </FormGroup>
@@ -301,6 +315,3 @@ const AddProducts = () => {
 };
 
 export default AddProducts;
-
-
-

@@ -27,8 +27,8 @@ const Shop = () => {
       const filteredProducts = product.filter((item) => item.category === "Bench");
       setProductData(filteredProducts);
     }
-    if (filterValue === "Matress") {
-      const filteredProducts = product.filter((item) => item.category === "Matress");
+    if (filterValue === "Mattress") {
+      const filteredProducts = product.filter((item) => item.category === "Mattress");
       setProductData(filteredProducts);
     }
     if (filterValue === "Study Table") {
@@ -108,7 +108,7 @@ const Shop = () => {
                   <option value="Table">Table</option>
                   <option value="Cabinet">Cabinet</option>
                   <option value="Bench">Bench</option>
-                  <option value="Matress">Matress</option>
+                  <option value="Mattress">Mattress</option>
                   <option value="Study Table">Study Table</option>
                   <option value="Laptop Table">Laptop Table</option>
                   <option value="Single Door Cupboard">Single Door Cupboard</option>

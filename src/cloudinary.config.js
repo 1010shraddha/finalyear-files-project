@@ -1,9 +1,9 @@
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
-  cloud_name: 'Shrinath',
-  api_key: '873465623358328',
-  api_secret: 'Rx6ZWJ-VgzfjdlNkh4L6IBhMV4c',
+  cloud_name: 'dtb83dgtt',
+  api_key: '395735319692249',
+  api_secret: 'y-Z080F6qiTZAdVs7-OZKZV5cMo',
   secure: true
 });
 
