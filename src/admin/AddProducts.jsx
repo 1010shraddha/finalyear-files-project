@@ -129,7 +129,6 @@
 //   )
 // }
 
-// export default AddProducts
 import React, { useState } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import "../style/addproducts.css";
@@ -142,10 +141,21 @@ const AddProducts = () => {
   const [enterTitle, setEnterTitle] = useState("");
   const [enterShortDesc, setEnterShortDesc] = useState("");
   const [enterDescription, setEnterDescription] = useState("");
-  const [enterCategory, setEnterCategory] = useState("Sofa"); // Default category
+  const [enterCategory, setEnterCategory] = useState("Sofa");
   const [enterPrice, setEnterPrice] = useState("");
   const [enterProductImg, setEnterProductImg] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  // Handle Image Preview
+  const handleImageChange = (e) => {
+    if (e.target.files.length > 0) {
+      const file = e.target.files[0];
+      setEnterProductImg(file);
+      setPreviewImage(URL.createObjectURL(file)); // Show preview
+    }
+  };
 
   // Upload Image to Cloudinary
   const uploadToCloudinary = async (file) => {
@@ -155,7 +165,7 @@ const AddProducts = () => {
     }
 
     const formData = new FormData();
-    formData.append("file",file );
+    formData.append("file", file);
     formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
 
     try {
@@ -168,7 +178,6 @@ const AddProducts = () => {
       );
 
       const data = await response.json();
-
       if (!data.secure_url) {
         throw new Error("Cloudinary upload failed");
       }
@@ -185,16 +194,26 @@ const AddProducts = () => {
   const addProduct = async (e) => {
     e.preventDefault();
 
-    // Validation before submission
+    // Form Validation
     if (!enterTitle || !enterShortDesc || !enterDescription || !enterCategory || !enterPrice || !enterProductImg) {
       toast.error("Please fill in all fields.");
       return;
     }
 
+    if (parseFloat(enterPrice) <= 0) {
+      toast.error("Price must be greater than zero.");
+      return;
+    }
+
+    setLoading(true);
+
     try {
       toast.info("Uploading image... Please wait.");
       const imageUrl = await uploadToCloudinary(enterProductImg);
-      if (!imageUrl) return;
+      if (!imageUrl) {
+        setLoading(false);
+        return;
+      }
 
       // Upload product details to Firestore
       await addDoc(collection(db, "products"), {
@@ -202,7 +221,7 @@ const AddProducts = () => {
         shortDesc: enterShortDesc,
         description: enterDescription,
         category: enterCategory,
-        price: parseFloat(enterPrice), // Ensure price is a number
+        price: parseFloat(enterPrice),
         imgUrl: imageUrl,
       });
 
@@ -211,6 +230,8 @@ const AddProducts = () => {
     } catch (error) {
       console.error("Error adding product:", error);
       toast.error("Product not added!");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -245,8 +266,8 @@ const AddProducts = () => {
 
               <FormGroup className="form_group">
                 <span>Description</span>
-                <input
-                  type="text"
+                <textarea
+                  rows="4"
                   placeholder="Enter full product description"
                   value={enterDescription}
                   onChange={(e) => setEnterDescription(e.target.value)}
@@ -263,6 +284,7 @@ const AddProducts = () => {
                     value={enterPrice}
                     onChange={(e) => setEnterPrice(e.target.value)}
                     required
+                    min="1"
                   />
                 </FormGroup>
 
@@ -275,16 +297,16 @@ const AddProducts = () => {
                     required
                   >
                     <option value="Chair">Chair</option>
-                  <option value="Table">Table</option>
-                  <option value="Cabinet">Cabinet</option>
-                  <option value="Bench">Bench</option>
-                  <option value="Mattress">Mattress</option>
-                  <option value="Study Table">Study Table</option>
-                  <option value="Laptop Table">Laptop Table</option>
-                  <option value="Single Door Cupboard">Single Door Cupboard</option>
-                  <option value="Double Door Cupboard">Double Door Cupboard</option>
-                  <option value="Single Sized Bed">Single Sized Bed</option>
-                  <option value="Double Sized Bed">Double Sized Bed</option>
+                    <option value="Table">Table</option>
+                    <option value="Cabinet">Cabinet</option>
+                    <option value="Bench">Bench</option>
+                    <option value="Mattress">Mattress</option>
+                    <option value="Study Table">Study Table</option>
+                    <option value="Laptop Table">Laptop Table</option>
+                    <option value="Single Door Cupboard">Single Door Cupboard</option>
+                    <option value="Double Door Cupboard">Double Door Cupboard</option>
+                    <option value="Single Sized Bed">Single Sized Bed</option>
+                    <option value="Double Sized Bed">Double Sized Bed</option>
                   </select>
                 </FormGroup>
               </div>
@@ -294,17 +316,22 @@ const AddProducts = () => {
                 <input
                   type="file"
                   accept="image/*"
-                  onChange={(e) => {
-                    if (e.target.files.length > 0) {
-                      setEnterProductImg(e.target.files[0]);
-                    }
-                  }}
+                  onChange={handleImageChange}
                   required
                 />
+                {previewImage && (
+                  <div className="image-preview mt-2">
+                    <img
+                      src={previewImage}
+                      alt="Preview"
+                      style={{ maxWidth: "150px", borderRadius: "5px" }}
+                    />
+                  </div>
+                )}
               </FormGroup>
 
-              <button className="buy_btn" type="submit">
-                Add Product
+              <button className="buy_btn" type="submit" disabled={loading}>
+                {loading ? "Adding Product..." : "Add Product"}
               </button>
             </Form>
           </Col>

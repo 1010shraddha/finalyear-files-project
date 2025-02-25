@@ -12,9 +12,12 @@ import Services from "../services/Services";
 import ProductsList from "../components/UI/ProductList";
 import Clock from "../components/UI/Clock";
 import counterImg from "../asset/image/counch.jpeg";
+import useGetData from "../custom-hooks/useGetData";
 
 
 const Home = () => {
+
+    const {data: products,loading} = useGetData('products')
     const navigate = useNavigate();
 
     const handleNavigate = () => {
@@ -34,7 +37,7 @@ const Home = () => {
         const filteredBestProduct = product.filter(item => 
             ["Chair", "Sofa"].includes(item.category) 
         );
-        const filteredNewProduct = product.filter(item => item.category === "Chair");
+        const filteredNewProduct = product.filter(item => item.category === "Sofa");
         const filteredNew1Product = product.filter(item => item.category === "Chair");
 
 
@@ -45,7 +48,7 @@ const Home = () => {
         //popular needs to be added
 
         
-    }, []);
+    }, [products]);
 
     return (
         <Helmet title={'Home'}>
@@ -83,7 +86,12 @@ const Home = () => {
                         <Col lg='12' className="text-center">
                             <h2 className="selection_title">Currently Trending Products</h2>
                         </Col>
-                        <ProductsList data={trendingProducts} /> 
+
+                        {
+                           loading ? <h5 className="fw-bold">Loading........</h5>:
+                           <ProductsList data={trendingProducts} /> 
+                        }
+                       
                     </Row>
                 </Container>
             </section>
@@ -94,7 +102,10 @@ const Home = () => {
                             <h2 className="selection_title">Best Sales</h2>
                         </Col>
                       
-                      <ProductsList data={bestSalesProducts}/>
+                        {
+                           loading ? <h5 className="fw-bold">Loading........</h5>:
+                           <ProductsList data={bestSalesProducts} /> 
+                        }
                     </Row>
                 </Container>
             </section>
@@ -134,8 +145,16 @@ const Home = () => {
         <Col lg='12' className="text-center">
                             <h2 className="selection_title">New Arrivals</h2>
                         </Col>
-<ProductsList data={newProducts} />
-<ProductsList data={new1Products} />
+
+{
+                           loading ? <h5 className="fw-bold">Loading........</h5>:
+                           <ProductsList data={newProducts} />
+                        }
+
+{
+                           loading ? <h5 className="fw-bold">Loading........</h5>:
+                           <ProductsList data={new1Products} />
+                        }
 
         </Row>
     </Container>

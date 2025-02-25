@@ -15,6 +15,7 @@ import ProtectedRoute from './ProtectedRoute';
 
 import AddProducts from '../admin/AddProducts';
 import Dashboard from '../admin/Dashboard';
+import User from '../admin/User';
 
 
 
@@ -40,7 +41,9 @@ const Routers = () => {
         <Route path="/*" element={<ProtectedRoute/>}>
             <Route path="checkout" element={<Checkout/>} />
             <Route path="dashboard" element={<Dashboard/>} />
-            <Route path="dashboard/add-products" element={<AddProducts/>} /> 
+            <Route path="dashboard/add-products" element={<AddProducts/>} />
+            <Route path="dashboard/users" element={<User/>} />  
+           
         </Route>
          
             
