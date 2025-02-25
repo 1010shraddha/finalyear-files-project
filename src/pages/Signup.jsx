@@ -150,7 +150,6 @@
 
 // export default Signup;
 
-
 import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
@@ -176,14 +175,17 @@ const Signup = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // Replace with actual upload preset
-    formData.append("cloud_name", "your_cloud_name"); // Replace with actual Cloudinary cloud name
+    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    formData.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
 
     try {
-      const response = await fetch("https://api.cloudinary.com/v1_1/your_cloud_name/image/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) throw new Error("Failed to upload image");
 
@@ -204,17 +206,18 @@ const Signup = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      
-      let photoURL = "";
+
+      let photoURL = null;
       if (file) {
         photoURL = await uploadToCloudinary(file);
       }
 
       // Update user profile in Firebase Auth
-      await updateProfile(user, {
-        displayName: username,
-        photoURL: photoURL || "",
-      });
+      if (photoURL) {
+        await updateProfile(user, { displayName: username, photoURL });
+      } else {
+        await updateProfile(user, { displayName: username });
+      }
 
       // Save user details to Firestore
       await setDoc(doc(db, "users", user.uid), {
@@ -279,7 +282,16 @@ const Signup = () => {
                   </FormGroup>
 
                   <FormGroup className="form__group d-flex align-items-center">
-                    <label className="custom-file-upload me-3">
+                    <label
+                      className="custom-file-upload me-3"
+                      style={{
+                        cursor: "pointer",
+                        background: "#f8f9fa",
+                        padding: "8px 12px",
+                        borderRadius: "5px",
+                        border: "1px solid #ccc",
+                      }}
+                    >
                       Choose File
                       <input type="file" onChange={(e) => setFile(e.target.files[0])} hidden />
                     </label>

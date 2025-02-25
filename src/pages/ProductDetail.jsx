@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
 import "../style/product_detail.css";
-import products from '../asset/data/product';
+import localProducts from '../asset/data/product';
 import Helmet from '../components/Helmet/Helmet';
 import CommonSection from '../components/UI/CommonSection';
 import { motion } from "framer-motion";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../redux/slices/cartSlice';
 import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
 import { toast } from 'react-toastify';
+import useGetData from '../custom-hooks/useGetData';
 
 const ProductDetail = () => {
   const [tab, setTab] = useState('desc');
@@ -20,18 +21,29 @@ const ProductDetail = () => {
   const [rating, setRating] = useState(null);
   const [reviews, setReviews] = useState([]);
   const { id } = useParams();
-  const product = products.find(item => item.id === id);
-  const { imgUrl, productName, price, avgRating, description, shortDesc, category } = product;
 
+  // Always call hooks first (before any return statement)
+  const { data: firebaseProducts, loading } = useGetData("products");
   const wishlistItems = useSelector(state => state.wishlist.items);
 
+  // Combine local and Firebase products
+  const allProducts = [...localProducts, ...firebaseProducts];
+  const product = allProducts.find(item => item.id === id);
+
   useEffect(() => {
-    // Load reviews from local storage if available
     const storedReviews = JSON.parse(localStorage.getItem(`reviews-${id}`));
     if (storedReviews) {
       setReviews(storedReviews);
     }
+    window.scrollTo(0, 0);
   }, [id]);
+
+  // Return statements AFTER hooks are declared
+  if (loading) return <p>Loading product...</p>;
+  if (!product) return <p>Product not found.</p>;
+
+  const { imgUrl, productName, price, avgRating, description, shortDesc, category } = product;
+  const isInWishlist = wishlistItems.some(item => item.id === id);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -43,15 +55,10 @@ const ProductDetail = () => {
       return;
     }
 
-    const newReview = {
-      name: reviewUserName,
-      rating,
-      text: reviewUserMsg,
-    };
-
+    const newReview = { name: reviewUserName, rating, text: reviewUserMsg };
     const updatedReviews = [...reviews, newReview];
     setReviews(updatedReviews);
-    localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews)); // Save to local storage
+    localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews));
 
     reviewUser.current.value = '';
     reviewMsg.current.value = '';
@@ -60,40 +67,21 @@ const ProductDetail = () => {
   };
 
   const addToCart = () => {
-    dispatch(
-      cartActions.addItem({
-        id,
-        imgUrl,
-        productName,
-        price,
-      })
-    );
+    dispatch(cartActions.addItem({ id, imgUrl, productName, price }));
     toast.success("Product added successfully");
   };
 
   const toggleWishlistHandler = () => {
-    const productExists = wishlistItems.find(item => item.id === id);
-    if (productExists) {
-      dispatch(removeFromWishlist(id)); // Remove from wishlist
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(id));
       toast.success("Product removed from wishlist!");
     } else {
-      dispatch(addToWishlist({
-        id,
-        imgUrl,
-        productName,
-        price,
-      }));
+      dispatch(addToWishlist({ id, imgUrl, productName, price }));
       toast.success("Product added to wishlist!");
     }
   };
 
-  const relatedProducts = products.filter(item => item.category === category);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [product]);
-
-  const isInWishlist = wishlistItems.some(item => item.id === id); // Check if product is in wishlist
+  const relatedProducts = allProducts.filter(item => item.category === category && item.id !== id);
 
   return (
     <Helmet title={productName}>
@@ -108,35 +96,18 @@ const ProductDetail = () => {
               <div className="product__details">
                 <h2>{productName}</h2>
                 <div className='product__rating'>
-                  <div>
-                    <span><i className="ri-star-fill"></i></span>
-                    <span><i className="ri-star-fill"></i></span>
-                    <span><i className="ri-star-fill"></i></span>
-                    <span><i className="ri-star-fill"></i></span>
-                    <span><i className="ri-star-half-fill"></i></span>
-                  </div>
                   <span>{avgRating} ratings</span>
                 </div>
-                <div>
-                  <p className='product__price'>Price: ₹{new Intl.NumberFormat('en-IN').format(price)}</p>
-                  <p>Category: {category}</p>
-                </div>
+                <p className='product__price'>Price: ₹{new Intl.NumberFormat('en-IN').format(price)}</p>
+                <p>Category: {category}</p>
                 <p className="mt-3">Short Description: {shortDesc}</p>
-
-                {/* Action buttons container */}
                 <div className="product__actions d-flex align-items-center gap-3">
-                  <motion.button 
-                    whileTap={{ scale: 1.2 }} 
-                    className="buy__btn" 
-                    onClick={addToCart}
-                  >
+                  <motion.button whileTap={{ scale: 1.2 }} className="buy__btn" onClick={addToCart}>
                     Add to Cart
                   </motion.button>
-
-                  {/* Wishlist Icon */}
                   <motion.i
                     whileTap={{ scale: 1.2 }}
-                    className={`ri-heart-${isInWishlist ? 'fill' : 'line'} wishlist__icon ${isInWishlist ? 'liked' : ''}`}
+                    className={`ri-heart-${isInWishlist ? 'fill' : 'line'} wishlist__icon`}
                     onClick={toggleWishlistHandler}
                     style={{ cursor: 'pointer', fontSize: '24px' }}
                   ></motion.i>
@@ -153,9 +124,7 @@ const ProductDetail = () => {
             <Col lg="12">
               <div className="tab__wrapper d-flex align-items-center gap-5">
                 <h6 className={`${tab === 'desc' ? 'active__tab' : ''}`} onClick={() => setTab('desc')}>Description</h6>
-                <h6 className={`${tab === 'rev' ? 'active__tab' : ''}`} onClick={() => setTab('rev')} >
-                  Reviews ({reviews.length})
-                </h6>
+                <h6 className={`${tab === 'rev' ? 'active__tab' : ''}`} onClick={() => setTab('rev')}>Reviews ({reviews.length})</h6>
               </div>
 
               {tab === "desc" ? (
@@ -174,7 +143,6 @@ const ProductDetail = () => {
                         </li>
                       ))}
                     </ul>
-
                     <div className="review__form">
                       <h4>Comment your Experience</h4>
                       <form onSubmit={submitHandler}>
@@ -182,13 +150,12 @@ const ProductDetail = () => {
                           <input type="text" placeholder="Enter Name" ref={reviewUser} required />
                         </div>
                         <div className='form__group d-flex align-items-center gap-3 rating__group'>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(1)}>1<i className="ri-star-s-fill"></i></motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(2)}>2<i className="ri-star-s-fill"></i></motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(3)}>3<i className="ri-star-s-fill"></i></motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(4)}>4<i className="ri-star-s-fill"></i></motion.span>
-                          <motion.span whileTap={{ scale: 1.2 }} onClick={() => setRating(5)}>5<i className="ri-star-s-fill"></i></motion.span>
+                          {[1, 2, 3, 4, 5].map(num => (
+                            <motion.span key={num} whileTap={{ scale: 1.2 }} onClick={() => setRating(num)}>
+                              {num}<i className="ri-star-s-fill"></i>
+                            </motion.span>
+                          ))}
                         </div>
-
                         <div className='form__group'>
                           <textarea ref={reviewMsg} rows={4} placeholder="Review Message ...." required />
                         </div>

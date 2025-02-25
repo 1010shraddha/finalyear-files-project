@@ -217,7 +217,7 @@ const AddProducts = () => {
 
       // Upload product details to Firestore
       await addDoc(collection(db, "products"), {
-        title: enterTitle,
+        productName: enterTitle,
         shortDesc: enterShortDesc,
         description: enterDescription,
         category: enterCategory,
@@ -266,8 +266,8 @@ const AddProducts = () => {
 
               <FormGroup className="form_group">
                 <span>Description</span>
-                <textarea
-                  rows="4"
+                 <input
+                  type="text"
                   placeholder="Enter full product description"
                   value={enterDescription}
                   onChange={(e) => setEnterDescription(e.target.value)}
@@ -296,6 +296,7 @@ const AddProducts = () => {
                     onChange={(e) => setEnterCategory(e.target.value)}
                     required
                   >
+                    <option value="Sofa">Sofa</option>
                     <option value="Chair">Chair</option>
                     <option value="Table">Table</option>
                     <option value="Cabinet">Cabinet</option>

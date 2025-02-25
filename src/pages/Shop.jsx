@@ -1,93 +1,61 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommonSection from "../components/UI/CommonSection";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col } from "react-bootstrap";
 import "../style/shop.css";
-import product from "../asset/data/product";
+import staticProducts from "../asset/data/product"; // Static product data
 import ProductsList from "../components/UI/ProductList";
+import useGetData from "../custom-hooks/useGetData"; // Firestore hook
 
 const Shop = () => {
-  const [productData, setProductData] = useState(product);
+  const { data: firebaseProducts, loading, error } = useGetData("products"); // Fetch Firestore data
+  const [productData, setProductData] = useState([]);
+  const [originalData, setOriginalData] = useState([]); // Store original data
 
+  // Combine Firebase and static data when Firebase data is loaded
+  useEffect(() => {
+    const combinedData = [...staticProducts, ...firebaseProducts];
+    setProductData(combinedData);
+    setOriginalData(combinedData); // Store the original data for filtering & sorting
+  }, [firebaseProducts]);
+
+  // Optimized Filter Function
   const handleFilter = (e) => {
     const filterValue = e.target.value;
-    if (filterValue === "Cabinet") {
-      const filteredProducts = product.filter((item) => item.category === "Cabinet");
+    if (filterValue === "all") {
+      setProductData(originalData);
+    } else {
+      const filteredProducts = originalData.filter(
+        (item) => item.category?.toLowerCase() === filterValue.toLowerCase()
+      );
       setProductData(filteredProducts);
     }
-    if (filterValue === "Chair") {
-      const filteredProducts = product.filter((item) => item.category === "Chair");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Sofa") {
-      const filteredProducts = product.filter((item) => item.category === "Sofa");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Bench") {
-      const filteredProducts = product.filter((item) => item.category === "Bench");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Mattress") {
-      const filteredProducts = product.filter((item) => item.category === "Mattress");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Study Table") {
-      const filteredProducts = product.filter((item) => item.category === "Study Table");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Laptop Table") {
-      const filteredProducts = product.filter((item) => item.category === "Laptop Table");
-      setProductData(filteredProducts);
-    }
-
-    if (filterValue === "Single Door Cupboard") {
-      const filteredProducts = product.filter((item) => item.category === "Single Door Cupboard");
-      setProductData(filteredProducts);
-    }
-    if (filterValue === "Double Door Cupboard") {
-      const filteredProducts = product.filter((item) => item.category === "Double Door Cupboard");
-      setProductData(filteredProducts);
-    }
-
-
-    
-    if (filterValue === "Single Sized Bed") {
-      const filteredProducts = product.filter((item) => item.category === "Single Sized Bed");
-      setProductData(filteredProducts);
-    }
-
-    if (filterValue === "Double Sized Bed") {
-      const filteredProducts = product.filter((item) => item.category === "Double Sized Bed");
-      setProductData(filteredProducts);
-    }
-
-    // More product filters can be added here
   };
 
+  //Search Function
   const handleSearch = (e) => {
-    const searchTerm = e.target.value;
-    const searchedProducts = product.filter(
+    const searchTerm = e.target.value.toLowerCase();
+    const searchedProducts = originalData.filter(
       (item) =>
-        item.productName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+        item.productName?.toLowerCase().includes(searchTerm) || 
+        item.category?.toLowerCase().includes(searchTerm)
     );
     setProductData(searchedProducts);
   };
 
+  //  Sort Function (A-Z & Z-A Sorting by productName)
   const handleSort = (e) => {
     const sortValue = e.target.value;
-    if (sortValue === "ascending") {
-      const sortedProducts = [...productData].sort((a, b) =>
-        a.productName.localeCompare(b.productName)
-      );
-      setProductData(sortedProducts);
-    }
-    if (sortValue === "descending") {
-      const sortedProducts = [...productData].sort((a, b) =>
-        b.productName.localeCompare(a.productName)
-      );
-      setProductData(sortedProducts);
-    }
+    const sortedProducts = [...productData].sort((a, b) => {
+      const nameA = a.productName?.trim().toLowerCase() || "";
+      const nameB = b.productName?.trim().toLowerCase() || "";
+
+      return sortValue === "ascending"
+        ? nameA.localeCompare(nameB) // A-Z
+        : nameB.localeCompare(nameA); // Z-A
+    });
+
+    setProductData(sortedProducts);
   };
 
   return (
@@ -100,38 +68,36 @@ const Shop = () => {
             <Col lg="3" md="6" sm="12">
               <div className="filter__widget">
                 <select onChange={handleFilter}>
-                  <option>Filter By Category</option>
-                  <option value="Sofa">Sofa</option>
-                  {/* <option value="Bed">Bed</option>
-                  <option value="Wardrobe">Wardrobe</option> */}
-                  <option value="Chair">Chair</option>
-                  <option value="Table">Table</option>
-                  <option value="Cabinet">Cabinet</option>
-                  <option value="Bench">Bench</option>
-                  <option value="Mattress">Mattress</option>
-                  <option value="Study Table">Study Table</option>
-                  <option value="Laptop Table">Laptop Table</option>
-                  <option value="Single Door Cupboard">Single Door Cupboard</option>
-                  <option value="Double Door Cupboard">Double Door Cupboard</option>
-                  <option value="Single Sized Bed">Single Sized Bed</option>
-                  <option value="Double Sized Bed">Double Sized Bed</option>
+                  <option value="all">All Categories</option>
+                  <option value="sofa">Sofa</option>
+                  <option value="chair">Chair</option>
+                  <option value="table">Table</option>
+                  <option value="cabinet">Cabinet</option>
+                  <option value="bench">Bench</option>
+                  <option value="mattress">Mattress</option>
+                  <option value="study table">Study Table</option>
+                  <option value="laptop table">Laptop Table</option>
+                  <option value="single door cupboard">Single Door Cupboard</option>
+                  <option value="double door cupboard">Double Door Cupboard</option>
+                  <option value="single sized bed">Single Sized Bed</option>
+                  <option value="double sized bed">Double Sized Bed</option>
                 </select>
               </div>
             </Col>
 
-            <Col lg="3" md="3" sm="20" className="ms-auto">
+            <Col lg="3" md="3" sm="12" className="ms-auto">
               <div className="filter__widget">
                 <select onChange={handleSort}>
                   <option>Sort By</option>
-                  <option value="ascending">Ascending</option>
-                  <option value="descending">Descending</option>
+                  <option value="ascending">A-Z</option>
+                  <option value="descending">Z-A</option>
                 </select>
               </div>
             </Col>
 
             <Col lg="6" md="12" sm="12" className="mt-3 mt-lg-0">
               <div className="search__box">
-                <input type="text" placeholder="Search........" onChange={handleSearch} />
+                <input type="text" placeholder="Search..." onChange={handleSearch} />
                 <span>
                   <i className="ri-search-2-line"></i>
                 </span>
@@ -144,8 +110,12 @@ const Shop = () => {
       <section className="pt-0">
         <Container>
           <Row>
-            {productData.length === 0 ? (
-              <h1 className="text-center fs-4">No Products are Found!</h1>
+            {loading ? (
+              <h1 className="text-center fs-4">Loading...</h1>
+            ) : error ? (
+              <h1 className="text-center fs-4 text-danger">Error: {error}</h1>
+            ) : productData.length === 0 ? (
+              <h1 className="text-center fs-4">No Products Found!</h1>
             ) : (
               <ProductsList data={productData} />
             )}

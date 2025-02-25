@@ -24,10 +24,10 @@ const useGetData = (collectionName) => {
 
         setData(results);
         setLoading(false);
-        console.log(`✅ Data fetched successfully from ${collectionName}:`, results);
+        console.log(` Data fetched successfully from ${collectionName}:`, results);
       },
       (error) => {
-        console.error(`❌ Firestore fetch error in ${collectionName}:`, error.message);
+        console.error(`Firestore fetch error in ${collectionName}:`, error.message);
         setError(error.message);
         setLoading(false);
       }

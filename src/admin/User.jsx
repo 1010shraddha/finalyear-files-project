@@ -24,9 +24,10 @@ const User = () => {
     <section>
       <Container>
         <Row>
-          <Col lg="12">
-            <h4 className="fw-bold">Users</h4>
-          </Col>
+        <Col lg="12" className="d-flex justify-content-center">
+  <h4 className="fw-bold">Users</h4>
+</Col>
+
           <Col lg="12" className="pt-5">
             <table className="table">
               <thead>
