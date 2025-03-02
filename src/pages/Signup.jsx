@@ -154,7 +154,7 @@ import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase.config";
 import { toast } from "react-toastify";
@@ -207,27 +207,27 @@ const Signup = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Send email verification
+      await sendEmailVerification(user);
+
       let photoURL = null;
       if (file) {
         photoURL = await uploadToCloudinary(file);
       }
 
-      // Update user profile in Firebase Auth
-      if (photoURL) {
-        await updateProfile(user, { displayName: username, photoURL });
-      } else {
-        await updateProfile(user, { displayName: username });
-      }
+      // Update profile with username and optionally photoURL
+      await updateProfile(user, { displayName: username, photoURL: photoURL || "" });
 
-      // Save user details to Firestore
+      // Store user details in Firestore but mark as unverified
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         displayName: username,
         email,
         photoURL: photoURL || "",
+        emailVerified: false, // Store verification status
       });
 
-      toast.success("Account created successfully!");
+      toast.success("Account created! Please verify your email before logging in.");
       navigate("/login");
     } catch (error) {
       console.error("Signup error:", error);
@@ -282,16 +282,13 @@ const Signup = () => {
                   </FormGroup>
 
                   <FormGroup className="form__group d-flex align-items-center">
-                    <label
-                      className="custom-file-upload me-3"
-                      style={{
-                        cursor: "pointer",
-                        background: "#f8f9fa",
-                        padding: "8px 12px",
-                        borderRadius: "5px",
-                        border: "1px solid #ccc",
-                      }}
-                    >
+                    <label className="custom-file-upload me-3" style={{
+                      cursor: "pointer",
+                      background: "#f8f9fa",
+                      padding: "8px 12px",
+                      borderRadius: "5px",
+                      border: "1px solid #ccc",
+                    }}>
                       Choose File
                       <input type="file" onChange={(e) => setFile(e.target.files[0])} hidden />
                     </label>

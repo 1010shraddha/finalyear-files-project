@@ -18,20 +18,22 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log(user);
-      setLoading(false);
+
+      // Check if email is verified
+      if (!user.emailVerified) {
+        toast.error("Please verify your email before logging in.");
+        setLoading(false);
+        return;
+      }
+
       toast.success("Successfully logged in");
-      navigate("/checkout");
+      navigate("/home");
     } catch (error) {
-      setLoading(false);
       toast.error(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -55,6 +57,7 @@ const Login = () => {
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </FormGroup>
                   <FormGroup className="form__group">
@@ -63,15 +66,15 @@ const Login = () => {
                       placeholder="Enter your password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      required
                     />
                   </FormGroup>
 
-                  <button type="submit" className="buy__btn auth__btn">
-                    Login
+                  <button type="submit" className="buy__btn auth__btn" disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
                   </button>
                   <p>
-                    Don't have an account?{" "}
-                    <Link to="/signup">Create an account</Link>
+                    Don't have an account? <Link to="/signup">Create an account</Link>
                   </p>
                 </Form>
               </Col>
