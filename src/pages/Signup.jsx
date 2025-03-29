@@ -154,7 +154,7 @@ import React, { useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile, sendEmailVerification } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendEmailVerification } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase.config";
 import { toast } from "react-toastify";
@@ -164,39 +164,10 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  // Upload image to Cloudinary
-  const uploadToCloudinary = async (file) => {
-    if (!file) return null;
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
-    formData.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
-
-    try {
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      if (!response.ok) throw new Error("Failed to upload image");
-
-      const data = await response.json();
-      return data.secure_url; // Return uploaded image URL
-    } catch (error) {
-      console.error("Cloudinary upload failed:", error);
-      toast.error("Image upload failed. Please try again.");
-      return null;
-    }
-  };
 
   // Handle user signup
   const signup = async (e) => {
@@ -210,20 +181,11 @@ const Signup = () => {
       // Send email verification
       await sendEmailVerification(user);
 
-      let photoURL = null;
-      if (file) {
-        photoURL = await uploadToCloudinary(file);
-      }
-
-      // Update profile with username and optionally photoURL
-      await updateProfile(user, { displayName: username, photoURL: photoURL || "" });
-
       // Store user details in Firestore but mark as unverified
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         displayName: username,
         email,
-        photoURL: photoURL || "",
         emailVerified: false, // Store verification status
       });
 
@@ -281,21 +243,6 @@ const Signup = () => {
                     />
                   </FormGroup>
 
-                  <FormGroup className="form__group d-flex align-items-center">
-                    <label className="custom-file-upload me-3" style={{
-                      cursor: "pointer",
-                      background: "#f8f9fa",
-                      padding: "8px 12px",
-                      borderRadius: "5px",
-                      border: "1px solid #ccc",
-                    }}>
-                      Choose File
-                      <input type="file" onChange={(e) => setFile(e.target.files[0])} hidden />
-                    </label>
-                    <span className="file-name">
-                      {file ? file.name : "No file chosen"}
-                    </span>
-                  </FormGroup>
 
                   <button type="submit" className="buy__btn auth__btn" disabled={loading}>
                     {loading ? "Creating Account..." : "Create an Account"}

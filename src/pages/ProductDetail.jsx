@@ -8,7 +8,7 @@ import CommonSection from '../components/UI/CommonSection';
 import { motion } from "framer-motion";
 import ProductsList from '../components/UI/ProductList';
 import { useDispatch, useSelector } from 'react-redux';
-import { cartActions } from '../redux/slices/cartSlice';
+import { addItem } from '../redux/slices/cartSlice';  // ✅ Fixed import
 import { addToWishlist, removeFromWishlist } from '../redux/slices/wishlistSlice';
 import { toast } from 'react-toastify';
 import useGetData from '../custom-hooks/useGetData';
@@ -22,11 +22,9 @@ const ProductDetail = () => {
   const [reviews, setReviews] = useState([]);
   const { id } = useParams();
 
-  // Always call hooks first (before any return statement)
   const { data: firebaseProducts, loading } = useGetData("products");
   const wishlistItems = useSelector(state => state.wishlist.items);
 
-  // Combine local and Firebase products
   const allProducts = [...localProducts, ...firebaseProducts];
   const product = allProducts.find(item => item.id === id);
 
@@ -38,36 +36,14 @@ const ProductDetail = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // Return statements AFTER hooks are declared
   if (loading) return <p>Loading product...</p>;
   if (!product) return <p>Product not found.</p>;
 
   const { imgUrl, productName, price, avgRating, description, shortDesc, category } = product;
   const isInWishlist = wishlistItems.some(item => item.id === id);
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const reviewUserName = reviewUser.current.value;
-    const reviewUserMsg = reviewMsg.current.value;
-
-    if (!reviewUserName || !reviewUserMsg || !rating) {
-      alert("Please fill all fields and provide a rating.");
-      return;
-    }
-
-    const newReview = { name: reviewUserName, rating, text: reviewUserMsg };
-    const updatedReviews = [...reviews, newReview];
-    setReviews(updatedReviews);
-    localStorage.setItem(`reviews-${id}`, JSON.stringify(updatedReviews));
-
-    reviewUser.current.value = '';
-    reviewMsg.current.value = '';
-    setRating(null);
-    toast.success('Review Submitted');
-  };
-
   const addToCart = () => {
-    dispatch(cartActions.addItem({ id, imgUrl, productName, price }));
+    dispatch(addItem({ id, imgUrl, productName, price }));  // ✅ Corrected dispatch
     toast.success("Product added successfully");
   };
 
@@ -143,25 +119,6 @@ const ProductDetail = () => {
                         </li>
                       ))}
                     </ul>
-                    <div className="review__form">
-                      <h4>Comment your Experience</h4>
-                      <form onSubmit={submitHandler}>
-                        <div className='form__group'>
-                          <input type="text" placeholder="Enter Name" ref={reviewUser} required />
-                        </div>
-                        <div className='form__group d-flex align-items-center gap-3 rating__group'>
-                          {[1, 2, 3, 4, 5].map(num => (
-                            <motion.span key={num} whileTap={{ scale: 1.2 }} onClick={() => setRating(num)}>
-                              {num}<i className="ri-star-s-fill"></i>
-                            </motion.span>
-                          ))}
-                        </div>
-                        <div className='form__group'>
-                          <textarea ref={reviewMsg} rows={4} placeholder="Review Message ...." required />
-                        </div>
-                        <motion.button whileTap={{ scale: 1.2 }} type="submit" className="buy__btn">Submit</motion.button>
-                      </form>
-                    </div>
                   </div>
                 </div>
               )}

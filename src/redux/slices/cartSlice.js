@@ -48,6 +48,8 @@
 // export const cartActions = cartSlice.actions;
 // export default cartSlice.reducer;
 import { createSlice } from "@reduxjs/toolkit";
+import { db, auth } from "../../firebase.config";
+import { doc, setDoc, getDoc } from "firebase/firestore"; // Removed unused updateDoc & arrayUnion
 
 const initialState = {
     items: [],
@@ -59,6 +61,11 @@ const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
+        setCart(state, action) {
+            state.items = action.payload.items || [];
+            state.totalQuantity = state.items.reduce((total, item) => total + item.quantity, 0);
+            state.totalAmount = state.items.reduce((total, item) => total + item.totalPrice, 0);
+        },
         addItem(state, action) {
             const newItem = action.payload;
             const existingItem = state.items.find((item) => item.id === newItem.id);
@@ -79,11 +86,10 @@ const cartSlice = createSlice({
                 existingItem.totalPrice += newItem.price;
             }
 
-            // Update the total amount
-            state.totalAmount = state.items.reduce(
-                (total, item) => total + item.totalPrice,
-                0
-            );
+            state.totalAmount = state.items.reduce((total, item) => total + item.totalPrice, 0);
+
+            // Save to Firestore
+            saveCartToFirestore(state.items);
         },
         removeItem(state, action) {
             const id = action.payload;
@@ -94,16 +100,43 @@ const cartSlice = createSlice({
                 state.totalQuantity -= existingItem.quantity;
             }
 
-            // Update the total amount
-            state.totalAmount = state.items.reduce(
-                (total, item) => total + item.totalPrice,
-                0
-            );
+            state.totalAmount = state.items.reduce((total, item) => total + item.totalPrice, 0);
+
+            // Save to Firestore
+            saveCartToFirestore(state.items);
         },
     },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
-export const cartActions = cartSlice.actions;
-
+export const { setCart, addItem, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
+
+// Function to save cart to Firestore
+const saveCartToFirestore = async (cartItems) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const cartRef = doc(db, "carts", user.uid);
+
+    try {
+        await setDoc(cartRef, { items: cartItems }, { merge: true });
+    } catch (error) {
+        console.error("Error saving cart:", error);
+    }
+};
+
+// Function to fetch cart from Firestore
+export const fetchCartFromFirestore = async (dispatch) => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    const cartRef = doc(db, "carts", user.uid);
+    try {
+        const cartSnap = await getDoc(cartRef);
+        if (cartSnap.exists()) {
+            dispatch(setCart(cartSnap.data()));
+        }
+    } catch (error) {
+        console.error("Error fetching cart:", error);
+    }
+};

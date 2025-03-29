@@ -5,14 +5,14 @@ import { Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
-import { cartActions } from '../../redux/slices/cartSlice';
-import { addToWishlist } from '../../redux/slices/wishlistSlice'; // Correct import
+import { addItem } from '../../redux/slices/cartSlice';  // ✅ Fixed import
+import { addToWishlist } from '../../redux/slices/wishlistSlice';
 
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(cartActions.addItem({
+    dispatch(addItem({
       id: item.id,
       productName: item.productName,
       price: item.price,
@@ -22,7 +22,7 @@ const ProductCard = ({ item }) => {
   };
 
   const addToWishlistHandler = () => {
-    dispatch(addToWishlist({ // Use addToWishlist directly
+    dispatch(addToWishlist({
       id: item.id,
       productName: item.productName,
       price: item.price,
@@ -45,20 +45,12 @@ const ProductCard = ({ item }) => {
         </div>
         <div className="product_card-bottom d-flex align-items-center justify-content-between p-2">
           <span className='Price'>₹{Number(item.price).toLocaleString('en-IN')}</span>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <motion.span 
-              whileTap={{ scale: 1.1 }} 
-              style={{ display: 'inline-flex', alignItems: 'center', marginRight: '10px' }} 
-              onClick={addToCart}>
-              <i className="ri-add-line"></i>
-            </motion.span>
-            <motion.span 
-              whileTap={{ scale: 1.1 }} 
-              style={{ display: 'inline-flex', alignItems: 'center' }} 
-              onClick={addToWishlistHandler}>
-              <i className="ri-heart-line"></i>
-            </motion.span>
-          </div>
+          <motion.span whileTap={{ scale: 1.1 }} onClick={addToCart}>
+            <i className="ri-add-line"></i>
+          </motion.span>
+          <motion.span whileTap={{ scale: 1.1 }} onClick={addToWishlistHandler}>
+            <i className="ri-heart-line"></i>
+          </motion.span>
         </div>
       </div>
     </Col>
