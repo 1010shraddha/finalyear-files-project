@@ -4,7 +4,8 @@ import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "../style/login.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase.config";
+import { auth, db } from "../firebase.config"; // ✅ Import Firestore
+import { doc, getDoc } from "firebase/firestore"; // ✅ Import Firestore functions
 import { toast } from "react-toastify";
 
 const Login = () => {
@@ -28,8 +29,18 @@ const Login = () => {
         return;
       }
 
+      // ✅ Check user role in Firestore
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const userRole = userDoc.exists() ? userDoc.data().role : "User"; // Default to "User" if no role found
+
       toast.success("Successfully logged in");
-      navigate("/home");
+
+      // ✅ Redirect based on role
+      if (userRole === "Admin") {
+        navigate("/dashboard"); // Redirect Admins
+      } else {
+        navigate("/home"); // Redirect Regular Users
+      }
     } catch (error) {
       toast.error(error.message);
     } finally {

@@ -129,13 +129,14 @@
 //   )
 // }
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import "../style/addproducts.css";
 import { toast } from "react-toastify";
 import { db } from "../firebase.config";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { getAuth } from "firebase/auth"; // Import Firebase Auth
 
 const AddProducts = () => {
   const [enterTitle, setEnterTitle] = useState("");
@@ -146,7 +147,31 @@ const AddProducts = () => {
   const [enterProductImg, setEnterProductImg] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // Check if user is Admin
   const navigate = useNavigate();
+  const auth = getAuth();
+
+  // Fetch user role from Firestore
+  useEffect(() => {
+    const checkAdminStatus = async () => {
+      if (auth.currentUser) {
+        const userRef = doc(db, "users", auth.currentUser.uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists() && userSnap.data().role === "Admin") {
+          setIsAdmin(true);
+        } else {
+          toast.error("Access Denied: Only Admins can add products.");
+          navigate("/dashboard"); // Redirect non-admins
+        }
+      } else {
+        toast.error("Please log in as an Admin.");
+        navigate("/login"); // Redirect if not logged in
+      }
+    };
+
+    checkAdminStatus();
+  }, [auth, navigate]);
 
   // Handle Image Preview
   const handleImageChange = (e) => {
@@ -193,6 +218,11 @@ const AddProducts = () => {
   // Add Product to Firestore
   const addProduct = async (e) => {
     e.preventDefault();
+
+    if (!isAdmin) {
+      toast.error("Access Denied: Only Admins can add products.");
+      return;
+    }
 
     // Form Validation
     if (!enterTitle || !enterShortDesc || !enterDescription || !enterCategory || !enterPrice || !enterProductImg) {
