@@ -23,7 +23,7 @@ const Shop = () => {
   const handleFilter = (e) => {
     const filterValue = e.target.value;
     if (filterValue === "all") {
-      setProductData(originalData);
+      setProductData(originalData); // Reset to original data
     } else {
       const filteredProducts = originalData.filter(
         (item) => item.category?.toLowerCase() === filterValue.toLowerCase()
@@ -32,7 +32,7 @@ const Shop = () => {
     }
   };
 
-  //Search Function
+  // Search Function
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
     const searchedProducts = originalData.filter(
@@ -43,9 +43,15 @@ const Shop = () => {
     setProductData(searchedProducts);
   };
 
-  //  Sort Function (A-Z & Z-A Sorting by productName)
+  // Sort Function (A-Z & Z-A Sorting by productName)
   const handleSort = (e) => {
     const sortValue = e.target.value;
+
+    if (sortValue === "Sort By") {
+      setProductData(originalData); // Reset to original data when "Sort By" is selected
+      return;
+    }
+
     const sortedProducts = [...productData].sort((a, b) => {
       const nameA = a.productName?.trim().toLowerCase() || "";
       const nameB = b.productName?.trim().toLowerCase() || "";
@@ -88,7 +94,7 @@ const Shop = () => {
             <Col lg="3" md="3" sm="12" className="ms-auto">
               <div className="filter__widget">
                 <select onChange={handleSort}>
-                  <option>Sort By</option>
+                  <option value="Sort By">Sort By</option>
                   <option value="ascending">A-Z</option>
                   <option value="descending">Z-A</option>
                 </select>

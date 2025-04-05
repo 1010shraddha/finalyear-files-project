@@ -1,0 +1,111 @@
+.dashboard-container {
+    padding: 20px;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.dashboard-logout {
+    background-color: #ff4d4f;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard-logout:hover {
+    background-color: #d9363e;
+}
+
+.dashboard-tabs {
+    margin: 20px 0;
+}
+
+.dashboard-tabs button {
+    margin-right: 10px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard-tabs .active {
+    background-color: #1890ff;
+    color: white;
+}
+
+.dashboard-stats h2 {
+    margin-bottom: 20px;
+}
+
+.dashboard-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    min-width: 200px;
+}
+
+.bg-blue {
+    background-color: #1890ff;
+}
+
+.bg-green {
+    background-color: #52c41a;
+}
+
+.bg-yellow {
+    background-color: #faad14;
+}
+
+.dashboard-users table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.dashboard-users th,
+.dashboard-users td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.btn-delete {
+    background-color: #ff7875;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background-color: #ff4d4f;
+}
+
+.dashboard-loading,
+.dashboard-unauthorized {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 50px;
+}

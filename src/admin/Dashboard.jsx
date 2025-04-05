@@ -1,69 +1,116 @@
-import { useEffect, useState } from "react";
-import { auth, db } from "../firebase.config"; // Ensure auth is imported
-import { collection, getDocs, deleteDoc, doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth"; // ✅ Import onAuthStateChanged
+import React, { useState, useEffect } from "react";
+import { auth, db } from "../firebase.config"; // Firebase config must be inside src/
+import { collection, getDocs } from "firebase/firestore";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import "../style/dashboard.css"; // Make sure this path is correct
 
 const Dashboard = () => {
+    const [activeTab, setActiveTab] = useState("home");
     const [users, setUsers] = useState([]);
-    const [isAdmin, setIsAdmin] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const savedTab = localStorage.getItem("activeAdminTab");
+        if (savedTab) setActiveTab(savedTab);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("activeAdminTab", activeTab);
+    }, [activeTab]);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            if (!user) {
+            if (user) {
+                const querySnapshot = await getDocs(collection(db, "users"));
+                const userData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const currentUser = userData.find(u => u.id === user.uid);
+                setIsAdmin(currentUser?.role === "Admin");
+                setUsers(userData);
                 setLoading(false);
-                return;
-            }
-
-            try {
-                // ✅ Fetch logged-in user role safely
-                const userDoc = await getDoc(doc(db, "users", user.uid));
-                if (userDoc.exists() && userDoc.data().role === "Admin") {
-                    setIsAdmin(true);
-
-                    // ✅ Fetch users only if admin
-                    const usersCollection = await getDocs(collection(db, "users"));
-                    setUsers(usersCollection.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            } finally {
-                setLoading(false);
+            } else {
+                navigate("/login");
             }
         });
 
-        return () => unsubscribe(); // ✅ Cleanup auth listener
-    }, []);
+        return () => unsubscribe();
+    }, [navigate]);
 
-    const deleteUser = async (userId) => {
-        if (!isAdmin) return; // Ensure only admins can delete users
-        try {
-            await deleteDoc(doc(db, "users", userId));
-            setUsers(users.filter(user => user.id !== userId));
-        } catch (error) {
-            console.error("Error deleting user:", error);
-        }
-    };
+    
 
-    if (loading) return <p>Loading...</p>;
-    if (!isAdmin) return <p>Access Denied: You are not an admin.</p>;
+    if (loading) return <div className="dashboard-loading">Loading...</div>;
+    if (!isAdmin) return <div className="dashboard-unauthorized">You are not authorized to access this page.</div>;
+
+    const totalUsers = users.length;
+    const adminUsers = users.filter(u => u.role === "Admin").length;
+    const regularUsers = totalUsers - adminUsers;
 
     return (
-        <div>
-            <h2>Dashboard</h2>
-            <p>Welcome to the admin dashboard</p>
+        <div className="dashboard-container">
+            <div className="dashboard-navbar">
+                <h1 className="dashboard-title">Admin Dashboard</h1>
+                <button
+                    onClick={() => {
+                        auth.signOut();
+                        navigate("/login");
+                    }}
+                    className="dashboard-logout"
+                >
+                    Logout
+                </button>
+            </div>
 
-            <h3>Registered Users</h3>
-            <ul>
-                {users.map(user => (
-                    <li key={user.id}>
-                        {user.email} - {user.role}
-                        {user.role !== "Admin" && (
-                            <button onClick={() => deleteUser(user.id)}>Remove</button>
-                        )}
-                    </li>
-                ))}
-            </ul>
+            <div className="dashboard-tabs">
+                <button className={activeTab === "home" ? "active" : ""} onClick={() => setActiveTab("home")}>Home</button>
+                <button className={activeTab === "users" ? "active" : ""} onClick={() => setActiveTab("users")}>Users</button>
+            
+            </div>
+
+            {activeTab === "home" && (
+                <div className="dashboard-stats">
+                    <h2>Welcome, Admin!</h2>
+                    <div className="dashboard-grid">
+                        <div className="dashboard-card bg-blue">Total Users: {totalUsers}</div>
+                        <div className="dashboard-card bg-green">Admin Users: {adminUsers}</div>
+                        <div className="dashboard-card bg-yellow">Regular Users: {regularUsers}</div>
+                    </div>
+                </div>
+            )}
+
+            {activeTab === "users" && (
+                <div className="dashboard-users">
+                    <h2>All Users</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {users.map(user => (
+                                <tr key={user.id}>
+                                   <td>{user.displayName || 'N/A'}</td>
+                                    <td>{user.email}</td>
+                                    <td>{user.role}</td>
+                                    
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+
+            {activeTab === "products" && (
+                <div className="dashboard-products">
+                    <h2>Add Products</h2>
+                    <p>Product form can go here.</p>
+                </div>
+            )}
         </div>
     );
 };

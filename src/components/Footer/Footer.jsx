@@ -13,14 +13,11 @@ const Footer = () => {
         <Row>
           <Col lg="3">
             <div className="logo">
-              <div>
-                <h1 className="text-white">Shrinath Furnitures</h1>
-              </div>
+              <h1 className="text-white">Shrinath Furnitures</h1>
             </div>
             <p className="footer__text md-4">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Reprehenderit deleniti ducimus dolorum totam, autem quae cum nulla
-              eos itaque est?
+              High-quality, handcrafted wooden furniture at affordable prices.
+              Crafted with excellence to provide durability and elegance.
             </p>
           </Col>
 
@@ -28,18 +25,13 @@ const Footer = () => {
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Top Categories</h4>
               <ListGroup>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/category/Laptop Table">Laptop Table</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/category/Bench">Bench</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/category/sofa">Sofa</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/category/study-table">Study Table</Link>
-                </ListGroupItem>
+                {["Laptop Table", "Bench", "Sofa", "Study Table"].map((category, index) => (
+                  <ListGroupItem key={index} className="ps-0 border-0">
+                    <Link to={`/category/${category.toLowerCase().replace(/\s/g, "-")}`}>
+                      {category}
+                    </Link>
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </div>
           </Col>
@@ -48,54 +40,46 @@ const Footer = () => {
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Useful Links</h4>
               <ListGroup>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/shop">Shop</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/cart">Cart</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/login">Login</Link>
-                </ListGroupItem>
-                <ListGroupItem className="ps-0 border-0">
-                  <Link to="/privacy-policy">Privacy Policy</Link>
-                </ListGroupItem>
+                {["Shop", "Cart", "Login", "Privacy Policy"].map((link, index) => (
+                  <ListGroupItem key={index} className="ps-0 border-0">
+                    <Link to={`/${link.toLowerCase().replace(/\s/g, "-")}`}>{link}</Link>
+                  </ListGroupItem>
+                ))}
               </ListGroup>
             </div>
           </Col>
 
           <Col lg="2">
             <div className="footer__quick-links">
-              <h4 className="quick__links-title ps-0 ">Contact Us</h4>
+              <h4 className="quick__links-title ps-0">Contact Us</h4>
               <ListGroup className="footer__contact">
                 <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
                   <span>
                     <i className="ri-map-pin-line"></i>
                   </span>
                   <p className="mb-0 address-text">
-                    Rajiv Gandhi Nagar, Mumbai,Maharashtra-40017
+                    Dharavi, 90-Feet Road, Mumbai - 400017
                   </p>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
                   <span>
                     <i className="ri-phone-line"></i>
                   </span>
-                  <p className="mb-0">+088123456779</p>
+                  <p className="mb-0">+91 8812345677</p>
                 </ListGroupItem>
                 <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-2">
                   <span>
                     <i className="ri-mail-line"></i>
                   </span>
-                  <p className="mb-0">arvindh12@gmail.com</p>
+                  <p className="mb-0">shrinathfurnitures@gmail.com</p>
                 </ListGroupItem>
               </ListGroup>
             </div>
           </Col>
 
-          <Col lg="12">
+          <Col lg="12" className="text-center mt-3">
             <p className="footer_copyright">
-              @copyright {year} developed by Shraddha and SelvaPriya. All rights
-              reserved.
+              &copy; {year} Developed by Shraddha & SelvaPriya. All rights reserved.
             </p>
           </Col>
         </Row>

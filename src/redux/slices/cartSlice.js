@@ -1,55 +1,8 @@
-// import { createSlice } from "@reduxjs/toolkit";
 
-// const initialState = {
-//     items: [],  // Changed `cartItems` to `items`
-//     totalQuantity: 0,
-//     totalPrice: 0,
-//     // add other properties as needed
-// };
-
-// const cartSlice = createSlice({
-//     name: 'cart',
-//     initialState,
-//     reducers: {
-//         addItem: (state, action) => {
-//             const newItem = action.payload;
-//             const existingItem = state.items.find(  // Changed `cartItems` to `items`
-//                 (item) => item.id === newItem.id
-//             );
-
-//             state.totalQuantity++;
-
-//             if (!existingItem) {
-//                 state.items.push({  // Changed `cartItems` to `items`
-//                     id: newItem.id,
-//                     productName: newItem.productName,
-//                     imgUrl: newItem.imgUrl,
-//                     price: newItem.price,
-//                     quantity: 1,
-//                     totalPrice: newItem.price
-//                 });
-//             } else {
-//                 existingItem.quantity++;
-//                 existingItem.totalPrice = Number(existingItem.totalPrice) + Number(newItem.price);
-//             }
-            
-//             state.totalAmount = state.items.reduce((total, item) => 
-//                 total + Number(item.price) * Number(item.quantity), 0
-//             );
-
-//             console.log(state.totalQuantity);
-//             console.log(state.items);
-//             console.log(newItem);
-//         },
-//     },
-// });
-
-// export const { removeItem } = cartSlice.actions;
-// export const cartActions = cartSlice.actions;
-// export default cartSlice.reducer;
 import { createSlice } from "@reduxjs/toolkit";
 import { db, auth } from "../../firebase.config";
-import { doc, setDoc, getDoc } from "firebase/firestore"; // Removed unused updateDoc & arrayUnion
+import { doc, setDoc, getDoc } from "firebase/firestore";
+//import { onAuthStateChanged } from "firebase/auth"; // Added missing import
 
 const initialState = {
     items: [],
@@ -88,7 +41,6 @@ const cartSlice = createSlice({
 
             state.totalAmount = state.items.reduce((total, item) => total + item.totalPrice, 0);
 
-            // Save to Firestore
             saveCartToFirestore(state.items);
         },
         removeItem(state, action) {
@@ -102,16 +54,19 @@ const cartSlice = createSlice({
 
             state.totalAmount = state.items.reduce((total, item) => total + item.totalPrice, 0);
 
-            // Save to Firestore
             saveCartToFirestore(state.items);
+        },
+        clearCart(state) {
+            state.items = [];
+            state.totalQuantity = 0;
+            state.totalAmount = 0;
         },
     },
 });
 
-export const { setCart, addItem, removeItem } = cartSlice.actions;
+export const { setCart, addItem, removeItem, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
-// Function to save cart to Firestore
 const saveCartToFirestore = async (cartItems) => {
     const user = auth.currentUser;
     if (!user) return;
@@ -125,18 +80,21 @@ const saveCartToFirestore = async (cartItems) => {
     }
 };
 
-// Function to fetch cart from Firestore
-export const fetchCartFromFirestore = async (dispatch) => {
-    const user = auth.currentUser;
-    if (!user) return;
-
-    const cartRef = doc(db, "carts", user.uid);
+export const fetchCartFromFirestore = () => async (dispatch) => {
     try {
+        const user = auth.currentUser; // Get user inside function
+        if (!user) return;
+
+        const cartRef = doc(db, "carts", user.uid);
         const cartSnap = await getDoc(cartRef);
+
         if (cartSnap.exists()) {
             dispatch(setCart(cartSnap.data()));
+        } else {
+            dispatch(setCart({ items: [], totalAmount: 0, totalQuantity: 0 }));
         }
     } catch (error) {
         console.error("Error fetching cart:", error);
     }
 };
+

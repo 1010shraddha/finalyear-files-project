@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../firebase.config.js";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth"; // ✅ Ensures real-time user auth check
 
 const AdminRoute = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -9,19 +10,20 @@ const AdminRoute = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const checkAdmin = async () => {
-      const user = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) {
         setLoading(false);
         return;
       }
 
       try {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const userDocRef = doc(db, "users", user.uid);
+        const userDoc = await getDoc(userDocRef);
+
         if (userDoc.exists() && userDoc.data().role === "Admin") {
           setIsAdmin(true);
 
-          // Ensure admin is also added to the "admins" collection
+          // ✅ Only add to "admins" if not already present
           const adminDocRef = doc(db, "admins", user.uid);
           const adminDoc = await getDoc(adminDocRef);
           if (!adminDoc.exists()) {
@@ -35,13 +37,13 @@ const AdminRoute = () => {
           }
         }
       } catch (error) {
-        console.error("Error fetching user role:", error);
+        console.error("Error checking admin role:", error);
+      } finally {
+        setLoading(false);
       }
+    });
 
-      setLoading(false);
-    };
-
-    checkAdmin();
+    return () => unsubscribe(); // ✅ Cleanup auth listener to prevent memory leaks
   }, []);
 
   if (loading) return <p>Loading...</p>;

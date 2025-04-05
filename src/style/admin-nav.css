@@ -1,105 +1,150 @@
-/* Ensure the header takes full width and has the primary background */
+/* Ensure full-width header with primary background */
 .admin_header {
     width: 100%;
-    background: var(--primary-color) !important;
+    background: var(--primary-color);
     padding: 15px 0;
 }
 
-/* Navigation wrapper for proper alignment */
+/* Navigation wrapper */
 .admin_nav-wrapper-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
-    width: 100%;
 }
 
-/* Logo styling - Shrinath furnitures name */
+/* Logo section: contains icon and name */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* spacing between image and text */
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon img {
+    height: 50px;
+    border-radius: 50%; /* Circular logo */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0; /* Remove duplicate margin */
+}
+
 .logo h2 {
     font-size: 1.7rem;
     color: white;
     margin: 0;
+    font-weight: bold;
+    transform: none; /* Remove text shift */
 }
 
-/* Search Box Styling */
-.search_box {
-    display: flex;
-    align-items: center;
-    background-color: white;
-    border-radius: 5px;
-    padding: 5px 15px;
-    width: 600px;  /* Increased width */
-    max-width: 650px; /* Ensures responsiveness */
-    position: relative;
-}
-
-/* Input field styling */
-.search_box input {
-    border: none;
-    outline: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    width: 100%;
-}
-
-/* Search icon inside the search box */
-.search_box span {
-    position: absolute;
-    right: 10px;
-    color: #666;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-/* Profile and right section */
+/* Admin Top Right Section */
 .admin_nav-top-right {
     display: flex;
     align-items: center;
     gap: 1.5rem;
 }
 
-/* Profile image styles */
-.admin_nav-top-right img {
+/* Profile Section */
+.admin_profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold; 
+}
+
+/* Ensure User Icon is visible */
+.admin_profile i {
+    font-size: 28px;
+    color: whitesmoke;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Profile Image (if using user image in future) */
+.admin_user-icon {
     width: 40px;
     height: 40px;
+    margin-left: 15px;
     border-radius: 50%;
+    object-fit: cover;
+    background-color: white;
+    border: 2px solid var(--primary-color);
+    padding: 2px;
+}
+
+/* Hide broken images */
+.admin_user-icon[src=""], 
+.admin_user-icon:not([src]) {
+    display: none;
+}
+
+/* Dropdown Menu */
+.admin_profile-actions {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Show dropdown when active */
+.admin_profile:hover .admin_profile-actions,
+.admin_profile-actions.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown items */
+.admin_profile-actions span {
+    padding: 10px 15px;
     cursor: pointer;
+    display: block;
+    color: #333;
+    font-size: 14px;
+    transition: 0.3s ease;
 }
 
-/* Dashboard text alignment */
-.dashboard_text {
-    color: white;
-    font-size: 16px;
+.admin_profile-actions span:hover {
+    background-color: #f1f1f1;
 }
 
-/* Icons on the right */
-.admin_nav-top-right span i {
-    color: whitesmoke;
-    cursor: pointer;
-    font-size: 30px; /* Increased icon size */
-}
-
-.admin_menu{
-    width:100%;
-    height:70px; 
+/* Admin menu section */
+.admin_menu {
+    width: 100%;
+    height: 70px;
     line-height: 43px;
     background: var(--card-bg-02);
 }
 
-.admin_menu-list{
+.admin_menu-list {
     display: flex;
     align-items: center;
     column-gap: 2.2rem;
     justify-content: center;
 }
 
-.admin_menu-list .admin_menu-item a{
+.admin_menu-list .admin_menu-item a {
     color: var(--primary-color);
     font-weight: 500;
     padding: 10px 15px;
     border-radius: 5px;
 }
 
-.active__admin-menu{
+.active__admin-menu {
     background: whitesmoke;
 }

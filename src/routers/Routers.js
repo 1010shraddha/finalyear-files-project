@@ -82,6 +82,7 @@ import Dashboard from '../admin/Dashboard';
 import User from '../admin/User';
 
 import AdminRoute from "../admin/AdminRoute"; // Import Admin Route Protection
+import CategoryProducts from '../pages/CategoryProducts';
 
 const Routers = () => {
     return (
@@ -96,6 +97,7 @@ const Routers = () => {
         <Route path="about" element={<About />} />
         <Route path="privacy-policy" element={<Privacy />} />
         <Route path="wishlist" element={<Wishlist/>} />
+        <Route path="/category/:categoryName" element={<CategoryProducts />} />
 
         {/* Protected Routes */}
         <Route path="/*" element={<ProtectedRoute/>}>

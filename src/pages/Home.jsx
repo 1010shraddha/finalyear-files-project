@@ -21,6 +21,8 @@ const Home = () => {
     const [bestSalesProducts, setBestSalesProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const [new1Products, setNew1Products] = useState([]);
+    const [PopularProducts, setPopularProducts] = useState([]);
+    
 
     const year = new Date().getFullYear();
 
@@ -32,13 +34,14 @@ const Home = () => {
             // ✅ Filter products based on category
             const filteredTrendingProduct = allProducts.filter(item => item.category === "Chair");
             const filteredBestProduct = allProducts.filter(item => ["Chair", "Sofa"].includes(item.category));
-            const filteredNewProduct = allProducts.filter(item => item.category === "Sofa");
-            const filteredNew1Product = allProducts.filter(item => item.category === "Chair");
-
+            const filteredNewProduct = allProducts.filter(item => item.category === "Study Table");
+            const filteredNew1Product = allProducts.filter(item => item.category === "Bench");
+            const filteredPopularProduct=allProducts.filter(item  => item.category==="Cabinet");
             setTrendingProducts(filteredTrendingProduct);
             setBestSalesProducts(filteredBestProduct);
             setNewProducts(filteredNewProduct);
             setNew1Products(filteredNew1Product);
+            setPopularProducts(filteredPopularProduct)
         }
     }, [firebaseProducts, loading]); // ✅ Updates when Firebase products change
 
@@ -50,8 +53,9 @@ const Home = () => {
                         <Col lg='6' md='6'>
                             <div className="hero_content">
                                 <h1 className="hero_subtitle">Trending Now in {year}</h1>
-                                <h2>Make your Interior More Unique and Comfy</h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                <h2>Make Your Interior Stand Out with Style & Comfort</h2>
+<p>Transform your space into a cozy masterpiece with furniture that blends elegance, charm, and functionality.</p>
+
                                 <motion.button 
                                     whileTap={{ scale: 1.2 }} 
                                     className='buy_btn' 
@@ -132,8 +136,8 @@ const Home = () => {
                         <Col lg='12' className="text-center">
                             <h2 className="selection_title">Popular in Category</h2>
                         </Col>
-                        <ProductsList data={newProducts} />
-                        <ProductsList data={new1Products} />
+                       
+                        <ProductsList data={PopularProducts} />
                     </Row>
                 </Container>
             </section>
